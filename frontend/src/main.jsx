@@ -4,7 +4,9 @@ import './index.css'
 import './config/i18n.js'
 import { Theme } from '@radix-ui/themes'
 import { useTranslation } from 'react-i18next'
+import { QueryClientProvider } from '@tanstack/react-query'
 import Router from './routes.jsx'
+import queryClient from './config/queryClient.js'
 
 export const Main = () => {
   const { i18n } = useTranslation();
@@ -12,7 +14,9 @@ export const Main = () => {
 
   return (
     <Theme dir={direction}>
-      <Router/>
+      <QueryClientProvider client={queryClient}>
+        <Router/>
+      </QueryClientProvider>
     </Theme>
   );
 }

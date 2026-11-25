@@ -58,14 +58,14 @@
 
 ## Étape 2 — Dépendances, proxy et client réseau
 
-- [ ] **2.1 — Ajouter les dépendances autorisées**
+- [x] **2.1 — Ajouter les dépendances autorisées**
   - Fichiers à modifier : `frontend/package.json`, `frontend/package-lock.json`.
   - Critères d’acceptation :
     - Seules `axios` et `@tanstack/react-query` sont ajoutées.
     - Les dépendances existantes ne sont pas remplacées inutilement.
     - `npm install`, `npm run lint` et `npm run build` restent fonctionnels.
 
-- [ ] **2.2 — Configurer le proxy Vite**
+- [x] **2.2 — Configurer le proxy Vite**
   - Fichier à modifier : `frontend/vite.config.js`.
   - Critères d’acceptation :
     - `/api/auth/login` est proxyfié vers `http://localhost:5000/auth/login`.
@@ -73,7 +73,7 @@
     - Le préfixe `/api` est retiré, car le backend n’en possède pas.
     - Aucun secret backend n’est ajouté à la configuration frontend.
 
-- [ ] **2.3 — Créer `axiosInstance`**
+- [x] **2.3 — Créer `axiosInstance`**
   - Fichier à créer : `frontend/src/api/axiosInstance.js`.
   - Critères d’acceptation :
     - `baseURL` vaut `/api`.
@@ -82,7 +82,7 @@
     - Un access token est ajouté uniquement sous la forme `Authorization: Bearer <accessToken>`.
     - Aucun token, mot de passe ou cookie n’est écrit dans les logs.
 
-- [ ] **2.4 — Créer le provider TanStack Query**
+- [x] **2.4 — Créer le provider TanStack Query**
   - Fichiers à modifier : `frontend/src/main.jsx`.
   - Fichiers à créer éventuellement : `frontend/src/config/queryClient.js`.
   - Critères d’acceptation :
@@ -91,7 +91,7 @@
     - Les erreurs réseau peuvent avoir un retry limité.
     - Les tokens ne sont pas stockés dans le cache React Query.
 
-- [ ] **2.5 — Créer l’extraction d’erreurs**
+- [x] **2.5 — Créer l’extraction d’erreurs**
   - Fichier à créer : `frontend/src/utils/apiError.js`.
   - Critères d’acceptation :
     - La fonction lit en priorité `error.response.data.data.title`.
