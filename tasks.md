@@ -32,7 +32,7 @@
     - `#9db4c0` n’est jamais utilisé seul pour du petit texte.
     - Les bordures, surfaces, boutons primaires, textes secondaires, focus et erreurs ont des variables sémantiques.
 
-- [ ] **1.4 — Ajouter les styles responsive globaux**
+- [x] **1.4 — Ajouter les styles responsive globaux**
   - Fichier à modifier : `frontend/src/index.css`.
   - Critères d’acceptation :
     - L’approche est mobile-first.
@@ -41,7 +41,7 @@
     - Les tableaux admin disposent d’une présentation carte ou d’un scroll horizontal contrôlé sur mobile.
     - Les règles utilisent `margin-inline`, `padding-inline` et `text-align: start` lorsque cela est pertinent pour RTL.
 
-- [ ] **1.5 — Finaliser le shell de l’application**
+- [x] **1.5 — Finaliser le shell de l’application**
   - Fichiers à modifier : `frontend/src/App.jsx`, `frontend/src/compnents/Header.jsx`, `frontend/src/compnents/Footer.jsx`, éventuellement `frontend/src/components/layout/AppLayout.jsx`.
   - Critères d’acceptation :
     - Le shell conserve `Header`, `Outlet` et `Footer`.
@@ -49,7 +49,7 @@
     - Aucun texte d’action essentiel n’est codé uniquement en français ou en anglais dans le shell.
     - Le shell respecte les tokens light/dark et les trois langues.
 
-- [ ] **1.6 — Corriger le titre et la langue HTML**
+- [x] **1.6 — Corriger le titre et la langue HTML**
   - Fichier à modifier : `frontend/index.html`.
   - Critères d’acceptation :
     - Le titre n’est plus `radix`.

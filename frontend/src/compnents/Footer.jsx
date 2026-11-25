@@ -9,8 +9,8 @@ const Footer = () => {
     <Box
       asChild
       style={{
-        borderTop: '1px solid var(--gray-a5)',
-        backgroundColor: 'var(--color-background)',
+        borderTop: '1px solid var(--color-border)',
+        backgroundColor: 'var(--color-surface)',
         marginTop: 'auto',
       }}
     >

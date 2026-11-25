@@ -48,8 +48,8 @@ export const Header = () => {
     <Box 
       asChild 
       style={{
-        borderBottom: '1px solid var(--gray-a5)',
-        backgroundColor: 'var(--color-background)',
+        borderBottom: '1px solid var(--color-border)',
+        backgroundColor: 'var(--color-surface)',
         position: 'sticky',
         top: 0,
         zIndex: 50,
@@ -72,7 +72,12 @@ export const Header = () => {
               {/* Icône Paramètres (Roue dentée) */}
               <DropdownMenu.Root>
                 <DropdownMenu.Trigger>
-                  <IconButton variant="ghost" color="gray" size="2" aria-label="Paramètres">
+                  <IconButton
+                    variant="ghost"
+                    color="gray"
+                    size="2"
+                    aria-label={t('header.settings')}
+                  >
                     <GearIcon width="18" height="18" />
                   </IconButton>
                 </DropdownMenu.Trigger>
@@ -81,7 +86,7 @@ export const Header = () => {
                   {/* Sous-menu Thème */}
                   <DropdownMenu.Sub>
                     <DropdownMenu.SubTrigger>
-                      <SunIcon width="16" height="16" style={{ marginRight: 8 }} />
+                      <SunIcon width="16" height="16" style={{ marginInlineEnd: 8 }} />
                       {t('header.theme')}
                     </DropdownMenu.SubTrigger>
                     <DropdownMenu.SubContent >
@@ -100,7 +105,7 @@ export const Header = () => {
                   {/* Sous-menu Langue */}
                   <DropdownMenu.Sub>
                     <DropdownMenu.SubTrigger>
-                      <GlobeIcon width="16" height="16" style={{ marginRight: 8 }} />
+                      <GlobeIcon width="16" height="16" style={{ marginInlineEnd: 8 }} />
                       {t('header.language')}
                     </DropdownMenu.SubTrigger>
                     <DropdownMenu.SubContent>
@@ -138,13 +143,13 @@ export const Header = () => {
                   <DropdownMenu.Content size="2" style={{ minWidth: 190 }}>
                     
                     <DropdownMenu.Item>
-                      <Link to="/profile"><PersonIcon width="14" height="14" style={{ marginRight: 8 }} /> {t('header.profile')}</Link>
+                      <Link to="/profile"><PersonIcon width="14" height="14" style={{ marginInlineEnd: 8 }} /> {t('header.profile')}</Link>
                     </DropdownMenu.Item>
 
                     <DropdownMenu.Separator />
 
                     <DropdownMenu.Item color="red" onClick={onLogout}>
-                      <ExitIcon width="14" height="14" style={{ marginRight: 8 }} /> {t('header.logout')}
+                       <ExitIcon width="14" height="14" style={{ marginInlineEnd: 8 }} /> {t('header.logout')}
                     </DropdownMenu.Item>
                   </DropdownMenu.Content>
                 </DropdownMenu.Root>
@@ -173,18 +178,18 @@ export const Header = () => {
                   
                   <DropdownMenu.Sub>
                     <DropdownMenu.SubTrigger>
-                      <GearIcon width="14" height="14" style={{ marginRight: 6 }} /> {t('header.settings')}
+                       <GearIcon width="14" height="14" style={{ marginInlineEnd: 6 }} /> {t('header.settings')}
                     </DropdownMenu.SubTrigger>
                     <DropdownMenu.SubContent>
-                      <DropdownMenu.Item onClick={() => onThemeChange?.('light')}>Clair</DropdownMenu.Item>
-                      <DropdownMenu.Item onClick={() => onThemeChange?.('dark')}>Sombre</DropdownMenu.Item>
-                      <DropdownMenu.Item onClick={() => onThemeChange?.('system')}>Système</DropdownMenu.Item>
+                       <DropdownMenu.Item onClick={() => onThemeChange?.('light')}>{t('header.light')}</DropdownMenu.Item>
+                       <DropdownMenu.Item onClick={() => onThemeChange?.('dark')}>{t('header.dark')}</DropdownMenu.Item>
+                       <DropdownMenu.Item onClick={() => onThemeChange?.('system')}>{t('header.system')}</DropdownMenu.Item>
                     </DropdownMenu.SubContent>
                   </DropdownMenu.Sub>
 
                   <DropdownMenu.Sub>
                     <DropdownMenu.SubTrigger>
-                      <GlobeIcon width="14" height="14" style={{ marginRight: 6 }} /> {t('header.language')}
+                       <GlobeIcon width="14" height="14" style={{ marginInlineEnd: 6 }} /> {t('header.language')}
                     </DropdownMenu.SubTrigger>
                     <DropdownMenu.SubContent>
                       <DropdownMenu.Item onClick={() => onLanguageChange?.('fr')}>Français</DropdownMenu.Item>
