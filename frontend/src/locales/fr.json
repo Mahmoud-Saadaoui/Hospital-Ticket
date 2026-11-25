@@ -1,0 +1,51 @@
+{
+    "home": {
+        "welcome": "Bienvenue"
+    },
+    "header": {
+        "appName": "MonApp",
+        "settings": "Paramètres",
+        "theme": "Thème",
+        "light": "Clair",
+        "dark": "Sombre",
+        "system": "Système",
+        "language": "Langue",
+        "profile": "Profil",
+        "logout": "Déconnexion",
+        "login": "Connexion",
+        "register": "Inscription"
+    },
+    "footer": {
+        "rights": "Tous droits réservés.",
+        "privacy": "Confidentialité",
+        "terms": "Conditions d'utilisation",
+        "contact": "Contact"
+    },    
+    "auth": {
+        "loginTitle": "Connexion",
+        "registerTitle": "Inscription",
+        "emailLabel": "Adresse email",
+        "passwordLabel": "Mot de passe",
+        "nameLabel": "Nom complet",
+        "loginButton": "Se connecter",
+        "registerButton": "S'inscrire",
+        "noAccount": "Vous n'avez pas de compte ?",
+        "hasAccount": "Vous avez déjà un compte ?",
+        "signupLink": "Créer un compte",
+        "signinLink": "Se connecter"
+    },
+        "profile": {
+        "title": "Mon Profil",
+        "subtitle": "Gérez vos informations personnelles et paramètres de compte.",
+        "name": "Nom",
+        "email": "Email",
+        "role": "Rôle",
+        "editButton": "Modifier le profil"
+    },
+        "notFound": {
+        "title": "404",
+        "heading": "Page non trouvée",
+        "description": "La page que vous recherchez n'existe pas ou a été déplacée.",
+        "backHome": "Retour à l'accueil"
+    }
+}

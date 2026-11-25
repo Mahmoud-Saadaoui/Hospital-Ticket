@@ -1,0 +1,53 @@
+@import "@radix-ui/themes/styles.css";
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap");
+
+:root {
+  --color-ice: #e0fbfc;
+  --color-mist: #c2dfe3;
+  --color-slate: #9db4c0;
+  --color-steel: #5c6b73;
+  --color-ink: #253237;
+
+  --color-bg: var(--color-ice);
+  --color-surface: #ffffff;
+  --color-surface-muted: var(--color-mist);
+  --color-text: var(--color-ink);
+  --color-text-muted: var(--color-steel);
+  --color-border: var(--color-slate);
+  --color-primary: var(--color-steel);
+  --color-primary-strong: var(--color-ink);
+  --color-on-primary: #ffffff;
+  --color-focus: var(--color-ink);
+}
+
+:root.dark {
+  --color-bg: #182428;
+  --color-surface: var(--color-ink);
+  --color-surface-muted: #34454b;
+  --color-text: var(--color-ice);
+  --color-text-muted: var(--color-mist);
+  --color-border: var(--color-steel);
+  --color-primary: var(--color-slate);
+  --color-primary-strong: var(--color-mist);
+  --color-on-primary: #182428;
+  --color-focus: var(--color-ice);
+}
+
+* {
+  font-family: "Cairo", sans-serif;
+}
+
+html,
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
