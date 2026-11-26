@@ -168,7 +168,7 @@
 
 ## Étape 4 — Thème, langues et RTL
 
-- [ ] **4.1 — Stabiliser `useTheme`**
+- [x] **4.1 — Stabiliser `useTheme`**
   - Fichier à modifier : `frontend/src/hooks/useTheme.js`.
   - Critères d’acceptation :
     - `light`, `dark` et `system` sont conservés.
@@ -177,7 +177,7 @@
     - La classe `dark` est appliquée sur `document.documentElement`.
     - Aucun accès DOM inutile n’est effectué pendant le rendu.
 
-- [ ] **4.2 — Synchroniser la langue et la direction**
+- [x] **4.2 — Synchroniser la langue et la direction**
   - Fichiers à modifier : `frontend/src/main.jsx`, `frontend/src/config/i18n.js`.
   - Critères d’acceptation :
     - `fr` et `en` définissent `lang` et `dir="ltr"`.
@@ -185,7 +185,7 @@
     - Radix reçoit la même direction.
     - Le changement de langue est appliqué sans rechargement.
 
-- [ ] **4.3 — Compléter les traductions**
+- [x] **4.3 — Compléter les traductions**
   - Fichiers à modifier : `frontend/src/locales/fr.json`, `frontend/src/locales/en.json`, `frontend/src/locales/ar.json`.
   - Critères d’acceptation :
     - Les trois fichiers possèdent les mêmes clés.
@@ -193,7 +193,7 @@
     - Aucun texte fonctionnel codé en dur ne reste dans les nouvelles pages.
     - Les messages `Invalid credentials`, `Unauthorized`, `Forbidden`, `Appointment is booked`, `Patient already have ticket`, `All tickets for today are booked` et `Logout success` ont une traduction.
 
-- [ ] **4.4 — Tester la palette dans les deux thèmes**
+- [x] **4.4 — Tester la palette dans les deux thèmes**
   - Fichiers à modifier : `frontend/src/index.css` et composants concernés.
   - Critères d’acceptation :
     - Les surfaces, cartes, boutons, bordures et textes utilisent les tokens.

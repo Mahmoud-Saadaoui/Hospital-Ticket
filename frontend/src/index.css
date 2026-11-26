@@ -33,11 +33,6 @@
   --color-focus: var(--color-ice);
 }
 
-* {
-  font-family: "Cairo", sans-serif;
-  box-sizing: border-box;
-}
-
 html {
   min-width: 320px;
   min-height: 100%;
@@ -53,6 +48,18 @@ body {
 
 body {
   overflow-x: hidden;
+}
+
+.radix-themes {
+  --default-font-family: "Cairo", sans-serif;
+  --accent-9: var(--color-primary);
+  --accent-10: var(--color-primary-strong);
+  --accent-contrast: var(--color-on-primary);
+}
+
+* {
+  font-family: "Cairo", sans-serif;
+  box-sizing: border-box;
 }
 
 img,
@@ -72,6 +79,16 @@ select {
 button,
 a {
   touch-action: manipulation;
+  text-decoration: none;
+}
+
+a {
+  color: var(--color-primary-strong);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-primary);
 }
 
 .app-shell {

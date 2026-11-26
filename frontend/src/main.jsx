@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+import { StrictMode, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import './config/i18n.js'
@@ -11,7 +11,13 @@ import { AuthProvider } from './context/AuthContext.jsx'
 
 export const Main = () => {
   const { i18n } = useTranslation();
-  const direction = i18n.language === 'ar' ? 'rtl' : 'ltr';
+  const language = i18n.language?.split('-')[0] || 'en';
+  const direction = language === 'ar' ? 'rtl' : 'ltr';
+
+  useEffect(() => {
+    document.documentElement.lang = language;
+    document.documentElement.dir = direction;
+  }, [direction, language]);
 
   return (
     <Theme dir={direction}>

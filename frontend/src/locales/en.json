@@ -13,7 +13,8 @@
         "profile": "Profile",
         "logout": "Logout",
         "login": "Login",
-        "register": "Register"
+        "register": "Register",
+        "admin": "Administration"
     },
     "footer": {
         "rights":"All rights reserved.",
@@ -47,5 +48,69 @@
         "heading": "Page not found",
         "description": "The page you are looking for doesn't exist or has been moved.",
         "backHome": "Back to home"
+    },
+    "common": {
+        "loading": "Loading...",
+        "retry": "Retry",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "save": "Save",
+        "delete": "Delete",
+        "edit": "Edit",
+        "close": "Close",
+        "search": "Search",
+        "empty": "No results",
+        "success": "Operation successful",
+        "error": "An error occurred"
+    },
+    "errors": {
+        "invalidCredentials": "Invalid credentials.",
+        "unauthorized": "Your session is not authorized.",
+        "forbidden": "You do not have permission to perform this action.",
+        "notFound": "The requested resource was not found.",
+        "conflict": "This resource already exists or is already booked.",
+        "tooLarge": "The file is too large.",
+        "tooManyRequests": "Too many attempts. Try again later.",
+        "network": "The server is unreachable.",
+        "generic": "An error occurred."
+    },
+    "patient": {
+        "homeTitle": "Find the right doctor",
+        "doctors": "Doctors",
+        "specialties": "Specialties",
+        "bookAppointment": "Book an appointment",
+        "myAppointments": "My appointments",
+        "profile": "My profile"
+    },
+    "doctor": {
+        "fullName": "Full name",
+        "specialty": "Specialty",
+        "email": "Email",
+        "phone": "Phone",
+        "bio": "About",
+        "patients": "Patients",
+        "create": "Add doctor",
+        "update": "Edit doctor",
+        "delete": "Delete doctor"
+    },
+    "appointment": {
+        "date": "Appointment date",
+        "time": "Time",
+        "barcode": "Barcode",
+        "ticket": "Ticket",
+        "book": "Book",
+        "cancel": "Cancel appointment",
+        "cancelConfirm": "Are you sure you want to cancel this appointment?",
+        "noAppointments": "You have no appointments.",
+        "invalidTime": "Choose a slot between 08:00 and 15:30.",
+        "alreadyBooked": "You already have a ticket for this doctor.",
+        "fullyBooked": "All tickets for today are booked.",
+        "booked": "This slot is already booked."
+    },
+    "upload": {
+        "image": "Image",
+        "chooseImage": "Choose an image",
+        "maxSize": "Maximum size: 1 MB.",
+        "invalidFormat": "Accepted formats: PNG, JPEG, GIF or WEBP."
     }
 }

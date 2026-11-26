@@ -13,7 +13,8 @@
         "profile": "Profil",
         "logout": "Déconnexion",
         "login": "Connexion",
-        "register": "Inscription"
+        "register": "Inscription",
+        "admin": "Administration"
     },
     "footer": {
         "rights": "Tous droits réservés.",
@@ -42,10 +43,74 @@
         "role": "Rôle",
         "editButton": "Modifier le profil"
     },
-        "notFound": {
+    "notFound": {
         "title": "404",
         "heading": "Page non trouvée",
         "description": "La page que vous recherchez n'existe pas ou a été déplacée.",
         "backHome": "Retour à l'accueil"
+    },
+    "common": {
+        "loading": "Chargement...",
+        "retry": "Réessayer",
+        "cancel": "Annuler",
+        "confirm": "Confirmer",
+        "save": "Enregistrer",
+        "delete": "Supprimer",
+        "edit": "Modifier",
+        "close": "Fermer",
+        "search": "Rechercher",
+        "empty": "Aucun résultat",
+        "success": "Opération réussie",
+        "error": "Une erreur est survenue"
+    },
+    "errors": {
+        "invalidCredentials": "Identifiants invalides.",
+        "unauthorized": "Votre session n'est pas autorisée.",
+        "forbidden": "Vous n'avez pas les droits nécessaires.",
+        "notFound": "La ressource demandée est introuvable.",
+        "conflict": "Cette ressource existe déjà ou est déjà réservée.",
+        "tooLarge": "Le fichier est trop volumineux.",
+        "tooManyRequests": "Trop de tentatives. Réessayez plus tard.",
+        "network": "Le serveur est inaccessible.",
+        "generic": "Une erreur est survenue."
+    },
+    "patient": {
+        "homeTitle": "Trouvez le bon médecin",
+        "doctors": "Médecins",
+        "specialties": "Spécialités",
+        "bookAppointment": "Réserver un rendez-vous",
+        "myAppointments": "Mes rendez-vous",
+        "profile": "Mon profil"
+    },
+    "doctor": {
+        "fullName": "Nom complet",
+        "specialty": "Spécialité",
+        "email": "Email",
+        "phone": "Téléphone",
+        "bio": "Présentation",
+        "patients": "Patients",
+        "create": "Ajouter un médecin",
+        "update": "Modifier le médecin",
+        "delete": "Supprimer le médecin"
+    },
+    "appointment": {
+        "date": "Date du rendez-vous",
+        "time": "Heure",
+        "barcode": "Code-barres",
+        "ticket": "Ticket",
+        "book": "Réserver",
+        "cancel": "Annuler le rendez-vous",
+        "cancelConfirm": "Voulez-vous vraiment annuler ce rendez-vous ?",
+        "noAppointments": "Vous n'avez aucun rendez-vous.",
+        "invalidTime": "Choisissez un créneau entre 08:00 et 15:30.",
+        "alreadyBooked": "Vous avez déjà un ticket pour ce médecin.",
+        "fullyBooked": "Tous les tickets du jour sont réservés.",
+        "booked": "Ce créneau est déjà réservé."
+    },
+    "upload": {
+        "image": "Image",
+        "chooseImage": "Choisir une image",
+        "maxSize": "Taille maximale : 1 Mo.",
+        "invalidFormat": "Format accepté : PNG, JPEG, GIF ou WEBP."
     }
 }

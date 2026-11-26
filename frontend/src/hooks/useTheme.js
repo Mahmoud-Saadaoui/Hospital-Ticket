@@ -1,86 +1,64 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react";
+
+const getInitialTheme = () => {
+  if (typeof window === "undefined") {
+    return "system";
+  }
+
+  const savedTheme = window.localStorage.getItem("theme");
+  return savedTheme === "light" || savedTheme === "dark"
+    ? savedTheme
+    : "system";
+};
 
 const useTheme = () => {
-    const [theme, setTheme] = useState(() => {
-      const savedTheme = localStorage.getItem("theme") 
-      return savedTheme || "system"
-    })
+  const [theme, setThemeState] = useState(getInitialTheme);
 
-    const toggleTheme = () => {
-        setTheme(prev => (prev === "dark" ? "light" : "dark"))
+  const setTheme = useCallback((nextTheme) => {
+    if (["light", "dark", "system"].includes(nextTheme)) {
+      setThemeState(nextTheme);
+    }
+  }, []);
+
+  const toggleTheme = useCallback(() => {
+    setThemeState((currentTheme) =>
+      currentTheme === "dark" ? "light" : "dark"
+    );
+  }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+    const applyTheme = () => {
+      const shouldUseDark =
+        theme === "dark" || (theme === "system" && darkQuery.matches);
+
+      root.classList.toggle("dark", shouldUseDark);
+    };
+
+    if (theme === "system") {
+      window.localStorage.removeItem("theme");
+    } else {
+      window.localStorage.setItem("theme", theme);
     }
 
-    const element = document.documentElement
+    applyTheme();
 
-    // détecte si le système d'exploitation de l'utilisateur est en mode sombre
-    const darkQuery = window.matchMedia("(prefers-color-scheme: dark)")
+    const changeHandler = () => {
+      if (theme === "system") {
+        applyTheme();
+      }
+    };
 
-    /**
-     * Applique la classe "dark" si:
-        ** Le thème sauvegardé est "dark" OU
-        ** Aucun thème n'est sauvegardé ET le système est en mode dark
-    */
-    const onWindowMatch = () => {
-        if (localStorage.theme === "dark" || (!("theme" in localStorage) && darkQuery.matches)) {
-            element.classList.add("dark")
-        } else {
-            element.classList.remove("dark")
-        }
-    }
+    darkQuery.addEventListener("change", changeHandler);
 
-    /**
-     * Exécute onWindowMatch() une fois au chargement du composant
-     * pour appliquer le thème initial.
-    */
-    useEffect(() => {
-        onWindowMatch()
-    }, [])
+    return () => {
+      darkQuery.removeEventListener("change", changeHandler);
+    };
+  }, [theme]);
 
-    /**
-     * Exécute onWindowMatch() une fois au chargement du composant pour appliquer le thème initial.
-        ** "dark": ajoute la classe "dark" et sauvegarde
-        ** "light": retire la classe "dark" et sauvegarde
-        ** "system": supprime la sauvegarde et utilise la préférence système
-    */
-    useEffect(() => {
-        switch (theme) {
-            case "dark":
-                element.classList.add("dark")
-                localStorage.setItem("theme", "dark")
-                break;
+  return { theme, setTheme, toggleTheme };
+};
 
-            case "light":
-                element.classList.remove("dark")
-                localStorage.setItem("theme", "light")
-                break;
-
-            default:
-                localStorage.removeItem("theme")
-                onWindowMatch()
-                break;
-        }
-    }, [theme])
-
-    /**
-     * Écoute les changements de préférence système uniquement si aucun thème n'est explicitement choisi.
-    */
-    useEffect(() => {
-        const changeHandler = (e) => {
-            if(!("theme" in localStorage)) {
-                if (e.matches) {
-                    element.classList.add("dark")
-                } else {
-                    element.classList.remove("dark")
-                }
-            }
-        }
-        darkQuery.addEventListener("change", changeHandler)
-        return () => {
-            darkQuery.removeEventListener("change", changeHandler)
-        }
-    }, [])
-
-    return { theme, setTheme, toggleTheme }
-}
-
-export default useTheme
+export default useTheme;
