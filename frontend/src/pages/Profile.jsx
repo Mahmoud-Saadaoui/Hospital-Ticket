@@ -1,73 +1,208 @@
-import { Container, Flex, Box, Text, Button, Card, Avatar, Separator } from '@radix-ui/themes';
-import { useTranslation } from 'react-i18next';
-import { PersonIcon, EnvelopeClosedIcon, BadgeIcon } from '@radix-ui/react-icons';
+import { useState } from "react";
+import {
+  Avatar,
+  Button,
+  Card,
+  Container,
+  Flex,
+  Separator,
+  Text,
+  TextField,
+} from "@radix-ui/themes";
+import { useTranslation } from "react-i18next";
+import { EnvelopeClosedIcon, PersonIcon } from "@radix-ui/react-icons";
+import useAuth from "../hooks/useAuth";
+import { useUpdateUser, useUploadUserImage } from "../hooks/useUsers";
+import getApiError from "../utils/apiError";
+
+const MAX_IMAGE_SIZE = 1024 * 1024;
+const ACCEPTED_IMAGE_TYPES = [
+  "image/png",
+  "image/jpeg",
+  "image/gif",
+  "image/webp",
+];
 
 const Profile = () => {
   const { t } = useTranslation();
+  const { user } = useAuth();
+  const updateUser = useUpdateUser();
+  const uploadUserImage = useUploadUserImage();
+  const [name, setName] = useState(user?.name || "");
+  const [email, setEmail] = useState(user?.email || "");
+  const [phone, setPhone] = useState(user?.phone || "");
+  const [password, setPassword] = useState("");
+  const [profilePhoto, setProfilePhoto] = useState(
+    user?.profilePhoto?.url || ""
+  );
+  const [localError, setLocalError] = useState("");
 
-  // Données factices pour l'exemple
-  const user = {
-    name: "Mahmoud Saadaoui",
-    email: "contact@tamkeen.tn",
-    role: "Full Stack Developer",
-    avatar: "https://images.unsplash.com/photo-1502823403499-6ccfcf4fb433?&w=64&h=64&dpr=2&q=70&crop=faces&fit=crop&w=32&h=32"
+  const initials =
+    name
+      .split(" ")
+      .map((part) => part[0])
+      .join("")
+      .slice(0, 2)
+      .toUpperCase() || "U";
+
+  if (!user) {
+    return (
+      <Container size="2" py="9">
+        <Text role="status">{t("common.empty")}</Text>
+      </Container>
+    );
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setLocalError("");
+
+    try {
+      await updateUser.mutateAsync({
+        userId: user.id,
+        payload: { name, email, phone, password },
+      });
+      setPassword("");
+    } catch (error) {
+      setLocalError(getApiError(error, t("errors.generic")).message);
+    }
+  };
+
+  const handlePhotoChange = async (event) => {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+
+    if (!file) {
+      return;
+    }
+
+    if (
+      file.size > MAX_IMAGE_SIZE ||
+      !ACCEPTED_IMAGE_TYPES.includes(file.type)
+    ) {
+      setLocalError(
+        `${t("upload.maxSize")} ${t("upload.invalidFormat")}`
+      );
+      return;
+    }
+
+    setLocalError("");
+
+    try {
+      const response = await uploadUserImage.mutateAsync(file);
+      setProfilePhoto(response?.data?.profilePhoto?.url || profilePhoto);
+    } catch (error) {
+      setLocalError(getApiError(error, t("errors.generic")).message);
+    }
   };
 
   return (
-    <Container size="2" py="9">
+    <Container size="2" py={{ initial: "6", sm: "9" }}>
       <Flex direction="column" gap="5">
-        <Box>
-          <Text size="8" weight="bold">
-            {t('profile.title')}
-          </Text>
-        </Box>
+        <Text size={{ initial: "7", sm: "8" }} weight="bold" as="h1">
+          {t("profile.title")}
+        </Text>
 
-        <Card size="4">
-          <Flex direction="column" gap="5" p="2">
+        <Card
+          style={{
+            backgroundColor: "var(--color-surface)",
+            border: "1px solid var(--color-border)",
+          }}
+        >
+          <Flex direction="column" gap="5" p="4">
             <Flex align="center" gap="4">
-              <Avatar 
-                size="6" 
-                src={user.avatar} 
-                fallback="MS" 
-                radius="full" 
-              />
-              <Box>
-                <Text size="5" weight="bold" style={{ display: 'block' }}>
-                  {user.name}
+              <Avatar size="6" src={profilePhoto} fallback={initials} radius="full" />
+              <Flex direction="column" gap="1">
+                <Text size="5" weight="bold">
+                  {name}
                 </Text>
-                <Text size="3" color="gray">
-                  {user.role}
+                <Text color="gray">
+                  {user?.isAdmin ? t("header.admin") : t("profile.patient")}
                 </Text>
-              </Box>
+              </Flex>
             </Flex>
 
             <Separator size="4" />
 
-            <Flex direction="column" gap="3">
-              <Flex align="center" gap="3">
-                <PersonIcon width="18" height="18" />
-                <Text size="3" weight="medium">{t('profile.name')} :</Text>
-                <Text size="3" color="gray">{user.name}</Text>
-              </Flex>
+            {localError && (
+              <Text color="red" role="alert">
+                {localError}
+              </Text>
+            )}
 
-              <Flex align="center" gap="3">
-                <EnvelopeClosedIcon width="18" height="18" />
-                <Text size="3" weight="medium">{t('profile.email')} :</Text>
-                <Text size="3" color="gray">{user.email}</Text>
-              </Flex>
+            <label>
+              <Text size="2" weight="medium">
+                {t("upload.chooseImage")}
+              </Text>
+              <input
+                type="file"
+                accept="image/png,image/jpeg,image/gif,image/webp"
+                onChange={handlePhotoChange}
+                disabled={uploadUserImage.isPending}
+                style={{ display: "block", marginBlockStart: "0.5rem" }}
+              />
+            </label>
 
-              <Flex align="center" gap="3">
-                <BadgeIcon width="18" height="18" />
-                <Text size="3" weight="medium">{t('profile.role')} :</Text>
-                <Text size="3" color="gray">{user.role}</Text>
-              </Flex>
-            </Flex>
+            <form onSubmit={handleSubmit}>
+              <Flex direction="column" gap="4">
+                <label>
+                  <Text size="2" weight="medium">{t("profile.name")}</Text>
+                  <TextField.Root
+                    value={name}
+                    onChange={(event) => setName(event.target.value)}
+                    autoComplete="name"
+                    required
+                  >
+                    <TextField.Slot><PersonIcon /></TextField.Slot>
+                  </TextField.Root>
+                </label>
 
-            <Box mt="3">
-              <Button variant="soft" size="2">
-                {t('profile.editButton')}
-              </Button>
-            </Box>
+                <label>
+                  <Text size="2" weight="medium">{t("profile.email")}</Text>
+                  <TextField.Root
+                    type="email"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                    autoComplete="email"
+                    required
+                  >
+                    <TextField.Slot><EnvelopeClosedIcon /></TextField.Slot>
+                  </TextField.Root>
+                </label>
+
+                <label>
+                  <Text size="2" weight="medium">{t("profile.phone")}</Text>
+                  <TextField.Root
+                    type="tel"
+                    value={phone}
+                    onChange={(event) => setPhone(event.target.value)}
+                    autoComplete="tel"
+                    required
+                  />
+                </label>
+
+                <label>
+                  <Text size="2" weight="medium">{t("profile.password")}</Text>
+                  <TextField.Root
+                    type="password"
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
+                    autoComplete="current-password"
+                    required
+                  />
+                </label>
+
+                <Button
+                  type="submit"
+                  disabled={updateUser.isPending}
+                  aria-busy={updateUser.isPending}
+                >
+                  {updateUser.isPending
+                    ? t("common.loading")
+                    : t("common.save")}
+                </Button>
+              </Flex>
+            </form>
           </Flex>
         </Card>
       </Flex>

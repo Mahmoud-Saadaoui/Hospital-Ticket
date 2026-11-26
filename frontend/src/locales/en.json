@@ -41,7 +41,10 @@
         "subtitle": "Manage your personal information and account settings.",
         "name": "Name",
         "email": "Email",
+        "phone": "Phone",
         "role": "Role",
+        "patient": "Patient",
+        "password": "Current password",
         "editButton": "Edit profile"
     },
     "notFound": {
@@ -90,6 +93,7 @@
         "phone": "Phone",
         "bio": "About",
         "patients": "Patients",
+        "detailUnavailable": "This doctor's details are unavailable. Return to the catalogue.",
         "create": "Add doctor",
         "update": "Edit doctor",
         "delete": "Delete doctor"

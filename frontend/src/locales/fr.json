@@ -41,7 +41,10 @@
         "subtitle": "Gérez vos informations personnelles et paramètres de compte.",
         "name": "Nom",
         "email": "Email",
+        "phone": "Téléphone",
         "role": "Rôle",
+        "patient": "Patient",
+        "password": "Mot de passe actuel",
         "editButton": "Modifier le profil"
     },
     "notFound": {
@@ -90,6 +93,7 @@
         "phone": "Téléphone",
         "bio": "Présentation",
         "patients": "Patients",
+        "detailUnavailable": "Le détail de ce médecin n'est plus disponible. Retournez au catalogue.",
         "create": "Ajouter un médecin",
         "update": "Modifier le médecin",
         "delete": "Supprimer le médecin"

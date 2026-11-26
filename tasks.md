@@ -289,7 +289,7 @@
 
 ## Étape 7 — Parcours patient
 
-- [ ] **7.1 — Transformer `Home` en accueil patient**
+- [x] **7.1 — Transformer `Home` en accueil patient**
   - Fichier à modifier : `frontend/src/pages/Home.jsx`.
   - Critères d’acceptation :
     - Présenter l’hôpital et un CTA vers les médecins.
@@ -297,7 +297,7 @@
     - Prévoir les états loading/empty/error si des données sont chargées.
     - Responsive sur mobile, tablette et desktop.
 
-- [ ] **7.2 — Créer le catalogue médecins**
+- [x] **7.2 — Créer le catalogue médecins**
   - Fichiers à créer : `frontend/src/pages/patient/DoctorsPage.jsx`, `frontend/src/components/doctors/DoctorCard.jsx`, `frontend/src/components/doctors/SpecialtyFilter.jsx`.
   - Critères d’acceptation :
     - Charger `GET /doctor/getSpecialties`.
@@ -306,7 +306,7 @@
     - Gérer spécialité absente, aucun médecin et erreur `404`.
     - Grille responsive avec palette light/dark.
 
-- [ ] **7.3 — Créer le détail et la réservation**
+- [x] **7.3 — Créer le détail et la réservation**
   - Fichiers à créer : `frontend/src/pages/patient/DoctorDetailsPage.jsx`, `frontend/src/components/appointments/AppointmentBookingForm.jsx`, `frontend/src/utils/appointmentSlots.js`.
   - Critères d’acceptation :
     - Utiliser le médecin transmis depuis la liste ou un état persistant simple.
@@ -316,7 +316,7 @@
     - Désactiver les dates passées et les créneaux invalides.
     - Afficher `Patient already have ticket`, `All tickets for today are booked`, `Appointment is booked`.
 
-- [ ] **7.4 — Créer la liste des tickets**
+- [x] **7.4 — Créer la liste des tickets**
   - Fichiers à créer : `frontend/src/pages/patient/AppointmentsPage.jsx`, `frontend/src/components/appointments/AppointmentCard.jsx`.
   - Critères d’acceptation :
     - Appeler `GET /appointment/:userId`.
@@ -325,7 +325,7 @@
     - Gérer `404` comme état vide et non comme crash.
     - Cartes mobiles, affichage plus dense desktop.
 
-- [ ] **7.5 — Créer le détail ticket et barcode**
+- [x] **7.5 — Créer le détail ticket et barcode**
   - Fichiers à créer : `frontend/src/pages/patient/AppointmentDetailsPage.jsx`, `frontend/src/components/appointments/BarcodeTicket.jsx`.
   - Critères d’acceptation :
     - Afficher le texte `HOSP-...`.
@@ -333,7 +333,7 @@
     - Le conteneur barcode reste LTR en arabe.
     - Prévoir impression/téléchargement navigateur sans modifier la donnée reçue.
 
-- [ ] **7.6 — Ajouter l’annulation**
+- [x] **7.6 — Ajouter l’annulation**
   - Fichiers à modifier : `AppointmentCard.jsx`, `AppointmentsPage.jsx`, hooks/API appointments.
   - Critères d’acceptation :
     - Confirmation avant `DELETE /appointment/:id`.
@@ -341,7 +341,7 @@
     - Les erreurs `403` sont affichées comme refus d’autorisation.
     - La query des rendez-vous est invalidée après succès.
 
-- [ ] **7.7 — Connecter le profil**
+- [x] **7.7 — Connecter le profil**
   - Fichier à modifier : `frontend/src/pages/Profile.jsx`.
   - Fichiers à créer éventuellement : `frontend/src/components/users/ProfileForm.jsx`, `frontend/src/components/users/ProfilePhotoUpload.jsx`.
   - Critères d’acceptation :
