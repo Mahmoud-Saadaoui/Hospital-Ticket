@@ -203,7 +203,7 @@
 
 ## Étape 5 — APIs métier et hooks React Query
 
-- [ ] **5.1 — Créer les API Users**
+- [x] **5.1 — Créer les API Users**
   - Fichier à créer : `frontend/src/api/usersApi.js`.
   - Critères d’acceptation :
     - Les méthodes correspondent exactement à `/users/`, `/users/:id` et `/users/upload-user-image`.
@@ -211,7 +211,7 @@
     - Les uploads utilisent `FormData.append("image", file)`.
     - La taille frontend maximale est 1 MiB.
 
-- [ ] **5.2 — Créer les API Doctors**
+- [x] **5.2 — Créer les API Doctors**
   - Fichier à créer : `frontend/src/api/doctorsApi.js`.
   - Critères d’acceptation :
     - Les spécialités et médecins par spécialité utilisent les routes publiques.
@@ -219,7 +219,7 @@
     - Les payloads utilisent `fullName`, `specialty`, `email`, `phone`, `bio`.
     - L’upload médecin utilise le champ `image`.
 
-- [ ] **5.3 — Créer les API Appointments**
+- [x] **5.3 — Créer les API Appointments**
   - Fichier à créer : `frontend/src/api/appointmentsApi.js`.
   - Critères d’acceptation :
     - La création envoie uniquement `doctorId` et `appointmentDate`.
@@ -227,14 +227,14 @@
     - Les réponses utilisent `data.appointment` et `data.appointments`.
     - Le médecin est lu via `doctor.fullName`.
 
-- [ ] **5.4 — Créer les hooks Doctors**
+- [x] **5.4 — Créer les hooks Doctors**
   - Fichier à créer : `frontend/src/hooks/useDoctors.js`.
   - Critères d’acceptation :
     - Hooks pour specialties, doctors by specialty, admin doctors et doctor patients.
     - Les clés Query sont stables et documentées.
     - Les états loading/error/empty sont directement exploitables par les pages.
 
-- [ ] **5.5 — Créer les hooks Appointments**
+- [x] **5.5 — Créer les hooks Appointments**
   - Fichier à créer : `frontend/src/hooks/useAppointments.js`.
   - Critères d’acceptation :
     - Query des rendez-vous patient.
@@ -243,7 +243,7 @@
     - Mutation d’annulation.
     - Invalidation de la liste après création ou annulation.
 
-- [ ] **5.6 — Créer les hooks Users**
+- [x] **5.6 — Créer les hooks Users**
   - Fichier à créer : `frontend/src/hooks/useUsers.js`.
   - Critères d’acceptation :
     - Queries admin users/user.
@@ -251,7 +251,7 @@
     - Invalidation après chaque mutation.
     - Aucun mot de passe présent dans l’état affiché.
 
-- [ ] **5.7 — Créer les helpers de date, créneaux et barcode**
+- [x] **5.7 — Créer les helpers de date, créneaux et barcode**
   - Fichiers à créer : `frontend/src/utils/date.js`, `frontend/src/utils/appointmentSlots.js`, `frontend/src/utils/barcode.js`.
   - Critères d’acceptation :
     - `appointmentSlots.js` génère `08:00` à `15:30` par pas de 30 minutes.
