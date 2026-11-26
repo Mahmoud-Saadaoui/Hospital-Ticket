@@ -1,20 +1,40 @@
 import { useState } from 'react';
 import { Container, Flex, Box, Text, TextField, Button, Card, Link as RadixLink } from '@radix-ui/themes';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { EnvelopeClosedIcon, LockClosedIcon } from '@radix-ui/react-icons';
+import useAuth from '../hooks/useAuth';
+import getApiError from '../utils/apiError';
 
 const Login = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
+  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ email, password });
-    // Logique de connexion ici, puis redirection vers l'accueil ou le profil
-    navigate('/');
+    setIsSubmitting(true);
+    setErrorMessage('');
+
+    try {
+      await login({ email, password });
+      const destination = location.state?.from?.pathname || '/';
+      navigate(destination, { replace: true });
+    } catch (error) {
+      setErrorMessage(
+        getApiError(
+          error,
+          t('errors.invalidCredentials')
+        ).message
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -28,15 +48,29 @@ const Login = () => {
 
             <form onSubmit={handleSubmit}>
               <Flex direction="column" gap="4">
+                {errorMessage && (
+                  <Text color="red" role="alert" aria-live="assertive" id="login-error">
+                    {errorMessage}
+                  </Text>
+                )}
                 <Box>
-                  <Text size="2" weight="medium" style={{ display: 'block', marginBottom: '6px' }}>
+                  <Text
+                    as="label"
+                    htmlFor="login-email"
+                    size="2"
+                    weight="medium"
+                    style={{ display: 'block', marginBottom: '6px' }}
+                  >
                     {t('auth.emailLabel')}
                   </Text>
                   <TextField.Root 
+                    id="login-email"
                     type="email" 
                     placeholder="name@example.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    autoComplete="email"
+                    aria-describedby={errorMessage ? "login-error" : undefined}
                     required
                   >
                     <TextField.Slot>
@@ -46,14 +80,23 @@ const Login = () => {
                 </Box>
 
                 <Box>
-                  <Text size="2" weight="medium" style={{ display: 'block', marginBottom: '6px' }}>
+                  <Text
+                    as="label"
+                    htmlFor="login-password"
+                    size="2"
+                    weight="medium"
+                    style={{ display: 'block', marginBottom: '6px' }}
+                  >
                     {t('auth.passwordLabel')}
                   </Text>
                   <TextField.Root 
+                    id="login-password"
                     type="password" 
                     placeholder="••••••••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    autoComplete="current-password"
+                    aria-describedby={errorMessage ? "login-error" : undefined}
                     required
                   >
                     <TextField.Slot>
@@ -62,8 +105,16 @@ const Login = () => {
                   </TextField.Root>
                 </Box>
 
-                <Button type="submit" size="3" style={{ width: '100%', marginTop: '12px' }}>
-                  {t('auth.loginButton')}
+                <Button
+                  type="submit"
+                  size="3"
+                  style={{ width: '100%', marginTop: '12px' }}
+                  disabled={isSubmitting}
+                  aria-busy={isSubmitting}
+                >
+                  {isSubmitting
+                    ? t('common.loading')
+                    : t('auth.loginButton')}
                 </Button>
               </Flex>
             </form>

@@ -26,6 +26,7 @@
         "loginTitle": "تسجيل الدخول",
         "registerTitle": "إنشاء حساب جديد",
         "emailLabel": "البريد الإلكتروني",
+        "phoneLabel": "رقم الهاتف",
         "passwordLabel": "كلمة المرور",
         "nameLabel": "الاسم الكامل",
         "loginButton": "دخول",

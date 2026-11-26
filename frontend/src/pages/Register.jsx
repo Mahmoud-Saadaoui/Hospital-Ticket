@@ -3,19 +3,35 @@ import { Container, Flex, Box, Text, TextField, Button, Card, Link as RadixLink 
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { PersonIcon, EnvelopeClosedIcon, LockClosedIcon } from '@radix-ui/react-icons';
+import useAuth from '../hooks/useAuth';
+import getApiError from '../utils/apiError';
 
 const Register = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { register } = useAuth();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ name, email, password });
-    // Logique d'inscription ici, puis redirection
-    navigate('/login');
+    setIsSubmitting(true);
+    setErrorMessage('');
+
+    try {
+      await register({ name, email, phone, password });
+      navigate('/', { replace: true });
+    } catch (error) {
+      setErrorMessage(
+        getApiError(error, t('errors.generic')).message
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -29,15 +45,28 @@ const Register = () => {
 
             <form onSubmit={handleSubmit}>
               <Flex direction="column" gap="4">
+                {errorMessage && (
+                  <Text color="red" role="alert">
+                    {errorMessage}
+                  </Text>
+                )}
                 <Box>
-                  <Text size="2" weight="medium" style={{ display: 'block', marginBottom: '6px' }}>
+                  <Text
+                    as="label"
+                    htmlFor="register-name"
+                    size="2"
+                    weight="medium"
+                    style={{ display: 'block', marginBottom: '6px' }}
+                  >
                     {t('auth.nameLabel')}
                   </Text>
                   <TextField.Root 
+                    id="register-name"
                     type="text" 
                     placeholder="John Doe"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                    autoComplete="name"
                     required
                   >
                     <TextField.Slot>
@@ -47,14 +76,43 @@ const Register = () => {
                 </Box>
 
                 <Box>
-                  <Text size="2" weight="medium" style={{ display: 'block', marginBottom: '6px' }}>
+                  <Text
+                    as="label"
+                    htmlFor="register-phone"
+                    size="2"
+                    weight="medium"
+                    style={{ display: 'block', marginBottom: '6px' }}
+                  >
+                    {t('auth.phoneLabel')}
+                  </Text>
+                  <TextField.Root
+                    id="register-phone"
+                    type="tel"
+                    placeholder="+216 00 000 000"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    autoComplete="tel"
+                    required
+                  />
+                </Box>
+
+                <Box>
+                  <Text
+                    as="label"
+                    htmlFor="register-email"
+                    size="2"
+                    weight="medium"
+                    style={{ display: 'block', marginBottom: '6px' }}
+                  >
                     {t('auth.emailLabel')}
                   </Text>
                   <TextField.Root 
+                    id="register-email"
                     type="email" 
                     placeholder="name@example.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    autoComplete="email"
                     required
                   >
                     <TextField.Slot>
@@ -64,14 +122,22 @@ const Register = () => {
                 </Box>
 
                 <Box>
-                  <Text size="2" weight="medium" style={{ display: 'block', marginBottom: '6px' }}>
+                  <Text
+                    as="label"
+                    htmlFor="register-password"
+                    size="2"
+                    weight="medium"
+                    style={{ display: 'block', marginBottom: '6px' }}
+                  >
                     {t('auth.passwordLabel')}
                   </Text>
                   <TextField.Root 
+                    id="register-password"
                     type="password" 
                     placeholder="••••••••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    autoComplete="new-password"
                     required
                   >
                     <TextField.Slot>
@@ -80,8 +146,16 @@ const Register = () => {
                   </TextField.Root>
                 </Box>
 
-                <Button type="submit" size="3" style={{ width: '100%', marginTop: '12px' }}>
-                  {t('auth.registerButton')}
+                <Button
+                  type="submit"
+                  size="3"
+                  style={{ width: '100%', marginTop: '12px' }}
+                  disabled={isSubmitting}
+                  aria-busy={isSubmitting}
+                >
+                  {isSubmitting
+                    ? t('common.loading')
+                    : t('auth.registerButton')}
                 </Button>
               </Flex>
             </form>

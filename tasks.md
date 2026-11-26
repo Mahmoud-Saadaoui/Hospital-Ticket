@@ -261,7 +261,7 @@
 
 ## Étape 6 — Login et Register
 
-- [ ] **6.1 — Connecter `Login`**
+- [x] **6.1 — Connecter `Login`**
   - Fichier à modifier : `frontend/src/pages/Login.jsx`.
   - Critères d’acceptation :
     - Le submit appelle `login({ email, password })`.
@@ -270,7 +270,7 @@
     - Une réussite redirige vers la destination demandée ou `/`.
     - Le layout reste responsive et lisible dans les trois langues.
 
-- [ ] **6.2 — Connecter `Register`**
+- [x] **6.2 — Connecter `Register`**
   - Fichier à modifier : `frontend/src/pages/Register.jsx`.
   - Critères d’acceptation :
     - Ajouter le champ obligatoire `phone`.
@@ -279,7 +279,7 @@
     - Afficher les erreurs de validation backend.
     - Une réussite redirige vers `/login` ou connecte explicitement selon le flux choisi.
 
-- [ ] **6.3 — Valider les formulaires**
+- [x] **6.3 — Valider les formulaires**
   - Fichiers à modifier : `Login.jsx`, `Register.jsx`, fichiers de traductions.
   - Critères d’acceptation :
     - Labels accessibles et associés aux champs.

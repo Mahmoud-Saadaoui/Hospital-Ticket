@@ -26,6 +26,7 @@
         "loginTitle": "Log in",
         "registerTitle": "Create an account",
         "emailLabel": "Email address",
+        "phoneLabel": "Phone number",
         "passwordLabel": "Password",
         "nameLabel": "Full name",
         "loginButton": "Log in",

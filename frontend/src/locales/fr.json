@@ -26,6 +26,7 @@
         "loginTitle": "Connexion",
         "registerTitle": "Inscription",
         "emailLabel": "Adresse email",
+        "phoneLabel": "Téléphone",
         "passwordLabel": "Mot de passe",
         "nameLabel": "Nom complet",
         "loginButton": "Se connecter",
