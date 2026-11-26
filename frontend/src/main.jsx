@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { QueryClientProvider } from '@tanstack/react-query'
 import Router from './routes.jsx'
 import queryClient from './config/queryClient.js'
+import { AuthProvider } from './context/AuthContext.jsx'
 
 export const Main = () => {
   const { i18n } = useTranslation();
@@ -15,7 +16,9 @@ export const Main = () => {
   return (
     <Theme dir={direction}>
       <QueryClientProvider client={queryClient}>
-        <Router/>
+        <AuthProvider>
+          <Router/>
+        </AuthProvider>
       </QueryClientProvider>
     </Theme>
   );

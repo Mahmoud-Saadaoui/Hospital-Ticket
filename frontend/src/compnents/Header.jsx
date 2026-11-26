@@ -23,13 +23,16 @@ import {
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import useTheme from '../hooks/useTheme';
+import useAuth from '../hooks/useAuth';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const { t, i18n } = useTranslation();
-
-  const isAuthenticated = true
+  const { user, isAuthenticated, isAdmin, logout } = useAuth();
+  const navigate = useNavigate();
 
   //  Switch Theme
   const { setTheme } = useTheme();
@@ -41,9 +44,25 @@ export const Header = () => {
     i18n.changeLanguage(lng)
   }
 
-  const onLogout = () => {
-    console.log("logout")
+  const onLogout = async () => {
+    setIsLoggingOut(true);
+
+    try {
+      await logout();
+    } catch {
+      // The local session is cleared by AuthContext even if the API fails.
+    } finally {
+      setIsLoggingOut(false);
+      navigate('/login', { replace: true });
+    }
   }
+
+  const userInitials = user?.name
+    ?.split(' ')
+    .map((part) => part[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase() || 'U';
   return (
     <Box 
       asChild 
@@ -133,8 +152,8 @@ export const Header = () => {
                     <button style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
                       <Avatar 
                         size="2" 
-                        src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb433?&w=64&h=64&dpr=2&q=70&crop=faces&fit=crop&w=32&h=32" 
-                        fallback="MS" 
+                        src={user?.profilePhoto?.url}
+                        fallback={userInitials}
                         radius="full"
                       />
                     </button>
@@ -146,10 +165,16 @@ export const Header = () => {
                       <Link to="/profile"><PersonIcon width="14" height="14" style={{ marginInlineEnd: 8 }} /> {t('header.profile')}</Link>
                     </DropdownMenu.Item>
 
+                    {isAdmin && (
+                      <DropdownMenu.Item>
+                        <Link to="/admin">{t('header.admin', { defaultValue: 'Administration' })}</Link>
+                      </DropdownMenu.Item>
+                    )}
+
                     <DropdownMenu.Separator />
 
-                    <DropdownMenu.Item color="red" onClick={onLogout}>
-                       <ExitIcon width="14" height="14" style={{ marginInlineEnd: 8 }} /> {t('header.logout')}
+                    <DropdownMenu.Item color="red" onClick={onLogout} disabled={isLoggingOut}>
+                      <ExitIcon width="14" height="14" style={{ marginInlineEnd: 8 }} /> {t('header.logout')}
                     </DropdownMenu.Item>
                   </DropdownMenu.Content>
                 </DropdownMenu.Root>
@@ -203,7 +228,12 @@ export const Header = () => {
                   {isAuthenticated ? (
                     <>
                       <DropdownMenu.Item ><Link to="/profile">{t('header.profile')}</Link></DropdownMenu.Item>
-                      <DropdownMenu.Item color="red" onClick={onLogout}>{t('header.logout')}</DropdownMenu.Item>
+                      {isAdmin && (
+                        <DropdownMenu.Item>
+                          <Link to="/admin">{t('header.admin', { defaultValue: 'Administration' })}</Link>
+                        </DropdownMenu.Item>
+                      )}
+                      <DropdownMenu.Item color="red" onClick={onLogout} disabled={isLoggingOut}>{t('header.logout')}</DropdownMenu.Item>
                     </>
                   ) : (
                     <>

@@ -102,7 +102,7 @@
 
 ## Étape 3 — Session, authentification et gardes
 
-- [ ] **3.1 — Créer l’API d’authentification**
+- [x] **3.1 — Créer l’API d’authentification**
   - Fichier à créer : `frontend/src/api/authApi.js`.
   - Critères d’acceptation :
     - `register` appelle `POST /auth/register` avec uniquement `name`, `email`, `phone`, `password`.
@@ -111,7 +111,7 @@
     - `refresh` appelle `GET /auth/refresh` avec les cookies.
     - `logout` appelle `POST /auth/logout`.
 
-- [ ] **3.2 — Gérer correctement le logout**
+- [x] **3.2 — Gérer correctement le logout**
   - Fichiers à modifier : `frontend/src/api/authApi.js`, `frontend/src/context/AuthContext.jsx`, `frontend/src/compnents/Header.jsx`.
   - Critères d’acceptation :
     - Une réponse `204 No Content` sans cookie est considérée comme un logout réussi.
@@ -119,7 +119,7 @@
     - L’état local est vidé même si la réponse de logout est atypique.
     - L’utilisateur est redirigé vers `/login`.
 
-- [ ] **3.3 — Créer `AuthContext` et `useAuth`**
+- [x] **3.3 — Créer `AuthContext` et `useAuth`**
   - Fichiers à créer : `frontend/src/context/AuthContext.jsx`, `frontend/src/hooks/useAuth.js`.
   - Critères d’acceptation :
     - Le contexte expose `user`, `accessToken`, `isAuthenticated`, `isAdmin`, `isInitializing`.
@@ -128,7 +128,7 @@
     - L’access token n’est pas inclus dans les données de page ou les logs.
     - Un refresh initial est tenté avant toute décision de redirection.
 
-- [ ] **3.4 — Ajouter l’interceptor de refresh**
+- [x] **3.4 — Ajouter l’interceptor de refresh**
   - Fichier à modifier : `frontend/src/api/axiosInstance.js`.
   - Fichiers à créer éventuellement : `frontend/src/api/tokenStore.js`.
   - Critères d’acceptation :
@@ -138,7 +138,7 @@
     - Un échec de refresh vide la session et redirige vers `/login`.
     - Une réponse `403` affiche une erreur d’autorisation sans boucle.
 
-- [ ] **3.5 — Créer les gardes de routes**
+- [x] **3.5 — Créer les gardes de routes**
   - Fichiers à créer : `frontend/src/components/auth/ProtectedRoute.jsx`, `frontend/src/components/auth/AdminRoute.jsx`.
   - Fichiers à modifier : `frontend/src/routes.jsx`.
   - Critères d’acceptation :
@@ -148,7 +148,7 @@
     - Un utilisateur non-admin ne peut pas accéder aux routes `/admin`.
     - Les gardes ne se basent pas uniquement sur le chemin URL.
 
-- [ ] **3.6 — Brancher le router existant**
+- [x] **3.6 — Brancher le router existant**
   - Fichier à modifier : `frontend/src/routes.jsx`.
   - Critères d’acceptation :
     - `/login` et `/register` restent publiques.
@@ -157,7 +157,7 @@
     - Le catch-all `NotFound` reste présent.
     - Les nouvelles routes sont ajoutées au router existant, sans second router.
 
-- [ ] **3.7 — Brancher le header sur la session**
+- [x] **3.7 — Brancher le header sur la session**
   - Fichier à modifier : `frontend/src/compnents/Header.jsx`.
   - Critères d’acceptation :
     - `const isAuthenticated = true` disparaît.
