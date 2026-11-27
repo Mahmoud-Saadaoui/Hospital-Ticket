@@ -460,35 +460,35 @@
 
 ## Étape 10 — Validation finale
 
-- [ ] **10.1 — Vérifier lint et build**
+- [x] **10.1 — Vérifier lint et build**
   - Fichiers concernés : tout `frontend/`.
   - Critères d’acceptation :
     - `npm run lint` passe sans erreur.
     - `npm run build` passe sans erreur.
     - Aucun import mort ou chemin vers un fichier supprimé.
 
-- [ ] **10.2 — Vérifier le parcours public**
+- [x] **10.2 — Vérifier le parcours public**
   - Fichiers concernés : routes, `Home`, `Login`, `Register`, pages médecins.
   - Critères d’acceptation :
     - `/login`, `/register`, `/`, `/doctors` et `NotFound` fonctionnent.
     - Le switch de langue fonctionne sur chaque route.
     - Les spécialités publiques sont chargées sans access token.
 
-- [ ] **10.3 — Vérifier le parcours patient**
+- [x] **10.3 — Vérifier le parcours patient**
   - Fichiers concernés : pages patient et hooks associés.
   - Critères d’acceptation :
     - Login, réservation, tickets, barcode, annulation et profil fonctionnent.
     - Le rechargement direct de `/doctors/:id` par un patient utilise le repli prévu sans contourner l’autorisation backend.
     - Les créneaux sont uniquement 08:00–15:30, toutes les 30 minutes.
 
-- [ ] **10.4 — Vérifier le parcours admin**
+- [x] **10.4 — Vérifier le parcours admin**
   - Fichiers concernés : pages admin, `AdminRoute`, hooks admin.
   - Critères d’acceptation :
     - CRUD médecins, photos, patients, utilisateurs et rendez-vous fonctionnent.
     - Un patient ne peut pas accéder aux vues admin.
     - Aucun mot de passe ou champ reset n’est affiché.
 
-- [ ] **10.5 — Vérifier les cookies et le refresh**
+- [x] **10.5 — Vérifier les cookies et le refresh**
   - Fichiers concernés : `axiosInstance`, `AuthContext`, `vite.config.js`.
   - Critères d’acceptation :
     - Les requêtes utilisent `credentials`.
@@ -496,7 +496,7 @@
     - Une expiration d’access token est récupérée une seule fois.
     - Les requêtes concurrentes sont rejouées sans duplication de refresh.
 
-- [ ] **10.6 — Vérifier l’absence de fuite sensible**
+- [x] **10.6 — Vérifier l’absence de fuite sensible**
   - Fichiers à vérifier : tout `frontend/src/`.
   - Critères d’acceptation :
     - Aucun token, mot de passe, secret ou body sensible dans `console.log`.

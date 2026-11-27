@@ -58,7 +58,7 @@ const notifySessionExpired = () => {
 };
 
 axiosInstance.interceptors.request.use((config) => {
-  if (accessToken) {
+  if (accessToken && !config.skipAuth) {
     config.headers.Authorization = `Bearer ${accessToken}`;
   }
 

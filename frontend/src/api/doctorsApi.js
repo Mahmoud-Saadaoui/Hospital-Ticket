@@ -1,13 +1,16 @@
 import axiosInstance from "./axiosInstance";
 
 export const getSpecialties = async () => {
-  const response = await axiosInstance.get("/doctor/getSpecialties");
+  const response = await axiosInstance.get("/doctor/getSpecialties", {
+    skipAuth: true,
+  });
   return response.data;
 };
 
 export const getDoctorsBySpecialty = async (specialty) => {
   const response = await axiosInstance.get(
-    `/doctor/specialty/${encodeURIComponent(specialty)}`
+    `/doctor/specialty/${encodeURIComponent(specialty)}`,
+    { skipAuth: true }
   );
   return response.data;
 };
