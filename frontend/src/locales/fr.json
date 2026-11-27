@@ -65,7 +65,9 @@
         "search": "Rechercher",
         "empty": "Aucun résultat",
         "success": "Opération réussie",
-        "error": "Une erreur est survenue"
+        "error": "Une erreur est survenue",
+        "actions": "Actions",
+        "details": "Détails"
     },
     "errors": {
         "invalidCredentials": "Identifiants invalides.",
@@ -81,6 +83,7 @@
     "patient": {
         "homeTitle": "Trouvez le bon médecin",
         "doctors": "Médecins",
+        "id": "Identifiant",
         "specialties": "Spécialités",
         "bookAppointment": "Réserver un rendez-vous",
         "myAppointments": "Mes rendez-vous",
@@ -116,6 +119,35 @@
         "image": "Image",
         "chooseImage": "Choisir une image",
         "maxSize": "Taille maximale : 1 Mo.",
-        "invalidFormat": "Format accepté : PNG, JPEG, GIF ou WEBP."
+        "invalidFormat": "Format accepté : PNG, JPEG, GIF ou WEBP.",
+        "fileTooLarge": "L'image dépasse la taille maximale de 1 Mo.",
+        "noImage": "Aucune image",
+        "success": "Photo du médecin mise à jour.",
+        "errors": {
+            "400": "La photo est absente ou invalide.",
+            "401": "Votre session n'est pas autorisée.",
+            "403": "Vous n'avez pas les droits pour modifier cette photo.",
+            "404": "Ce médecin est introuvable.",
+            "413": "La photo dépasse la taille maximale de 1 Mo."
+        }
+    },
+    "admin": {
+        "doctorsDescription": "Gérez les médecins et leurs informations professionnelles.",
+        "doctorList": "Liste des médecins",
+        "doctorPatientsTitle": "Patients du médecin",
+        "doctorPatientsDescription": "Consultez les patients associés à ce médecin.",
+        "doctorPatientsLoaded": "La liste des patients est disponible.",
+        "noDoctorPatients": "Aucun patient n'est associé à ce médecin.",
+        "backToDoctors": "Retour aux médecins",
+        "noDoctors": "Aucun médecin n'est enregistré.",
+        "doctorSaved": "Médecin enregistré avec succès.",
+        "doctorDeleted": "Médecin supprimé avec succès.",
+        "confirmDelete": "Supprimer le médecin {{name}} ?",
+        "appointmentsTitle": "Suivi des rendez-vous",
+        "appointmentsDescription": "Consultez les rendez-vous enregistrés dans l'hôpital.",
+        "appointmentsLoaded": "Données à jour",
+        "noAppointments": "Aucun rendez-vous enregistré.",
+        "userSubtitle": "Consultez et gérez les comptes utilisateurs.",
+        "deleteUserConfirm": "Voulez-vous vraiment supprimer cet utilisateur ?"
     }
 }

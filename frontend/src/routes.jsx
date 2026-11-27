@@ -12,6 +12,13 @@ import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom"
 import { useTranslation } from "react-i18next";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import useAuth from "./hooks/useAuth";
+import AdminRoute from "./components/auth/AdminRoute";
+import AdminLayout from "./pages/admin/AdminLayout";
+import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
+import AdminDoctorsPage from "./pages/admin/AdminDoctorsPage";
+import AdminUsersPage from "./pages/admin/AdminUsersPage";
+import DoctorPatientsPage from "./pages/admin/DoctorPatientsPage";
+import AdminAppointmentsPage from "./pages/admin/AdminAppointmentsPage";
 
 function Router() {
   const { t } = useTranslation();
@@ -68,6 +75,21 @@ function Router() {
               <Profile />
             </ProtectedRoute>
           ),
+        },
+        {
+          path: "/admin",
+          element: (
+            <AdminRoute>
+              <AdminLayout />
+            </AdminRoute>
+          ),
+          children: [
+            { index: true, element: <AdminDashboardPage /> },
+            { path: "doctors", element: <AdminDoctorsPage /> },
+            { path: "doctors/:id/patients", element: <DoctorPatientsPage /> },
+            { path: "users", element: <AdminUsersPage /> },
+            { path: "appointments", element: <AdminAppointmentsPage /> },
+          ],
         },
         { path: "/*", element: <NotFound /> },
       ],

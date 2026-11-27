@@ -353,7 +353,7 @@
 
 ## Étape 8 — Parcours admin
 
-- [ ] **8.1 — Créer le layout admin**
+- [x] **8.1 — Créer le layout admin**
   - Fichiers à créer : `frontend/src/pages/admin/AdminLayout.jsx`, `frontend/src/pages/admin/AdminDashboardPage.jsx`.
   - Fichiers à modifier : `frontend/src/routes.jsx`, `frontend/src/components/layout/Header.jsx` ou `frontend/src/compnents/Header.jsx`.
   - Critères d’acceptation :
@@ -362,7 +362,7 @@
     - Sidebar/navigation responsive.
     - Compteurs et erreurs possèdent des états de chargement.
 
-- [ ] **8.2 — Implémenter le CRUD médecins**
+- [x] **8.2 — Implémenter le CRUD médecins**
   - Fichiers à créer : `frontend/src/pages/admin/AdminDoctorsPage.jsx`, `frontend/src/components/doctors/DoctorForm.jsx`, `frontend/src/components/doctors/DoctorTable.jsx`.
   - Critères d’acceptation :
     - CRUD via les endpoints admin exacts.
@@ -371,7 +371,7 @@
     - Confirmation avant suppression.
     - Table desktop et cartes/scroll contrôlé mobile.
 
-- [ ] **8.3 — Ajouter upload photo médecin**
+- [x] **8.3 — Ajouter upload photo médecin**
   - Fichiers à modifier : page et composants médecins admin.
   - Critères d’acceptation :
     - Upload `FormData` champ `image`.
@@ -380,7 +380,7 @@
     - Gestion des erreurs `400`, `403`, `404`, `413`.
     - Mise à jour visuelle de `profilePhoto.url` après succès.
 
-- [ ] **8.4 — Afficher les patients d’un médecin**
+- [x] **8.4 — Afficher les patients d’un médecin**
   - Fichiers à créer : `frontend/src/pages/admin/DoctorPatientsPage.jsx`, `frontend/src/components/users/PatientTable.jsx`.
   - Critères d’acceptation :
     - Appeler `GET /doctor/doctors/:id/patients`.
@@ -388,7 +388,7 @@
     - Gérer une liste vide sans afficher une erreur.
     - Responsive et RTL.
 
-- [ ] **8.5 — Implémenter la gestion utilisateurs**
+- [x] **8.5 — Implémenter la gestion utilisateurs**
   - Fichiers à créer : `frontend/src/pages/admin/AdminUsersPage.jsx`, `frontend/src/components/users/UserTable.jsx`.
   - Critères d’acceptation :
     - Utiliser `GET /users/`, `GET /users/:id`, `DELETE /users/:id`.
@@ -396,7 +396,7 @@
     - Confirmation avant suppression.
     - Gérer `403` et `404`.
 
-- [ ] **8.6 — Implémenter le suivi admin des rendez-vous**
+- [x] **8.6 — Implémenter le suivi admin des rendez-vous**
   - Fichiers à créer : `frontend/src/pages/admin/AdminAppointmentsPage.jsx`, `frontend/src/components/appointments/AdminAppointmentTable.jsx`.
   - Critères d’acceptation :
     - Appeler `GET /appointment/`.

@@ -133,6 +133,404 @@ a:hover {
   gap: 0.75rem;
 }
 
+.admin-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: calc(100dvh - 4.5rem);
+  background: var(--color-bg);
+}
+
+.admin-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.25rem;
+  background: var(--color-ink);
+  color: var(--color-ice);
+}
+
+.admin-sidebar__heading h1,
+.admin-dashboard h2 {
+  margin: 0;
+  color: inherit;
+  font-size: clamp(1.65rem, 4vw, 2.4rem);
+}
+
+.admin-sidebar__eyebrow,
+.admin-dashboard__eyebrow {
+  margin: 0 0 0.35rem;
+  color: var(--color-slate);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.admin-sidebar__nav {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+}
+
+.admin-sidebar__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 2.75rem;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid transparent;
+  border-radius: 0.55rem;
+  color: var(--color-mist);
+  white-space: nowrap;
+}
+
+.admin-sidebar__link:hover,
+.admin-sidebar__link.is-active {
+  background: var(--color-steel);
+  color: var(--color-ice);
+}
+
+.admin-sidebar__link svg,
+.admin-sidebar__footer svg {
+  flex: 0 0 auto;
+}
+
+.admin-sidebar__footer {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  margin-block-start: auto;
+  color: var(--color-slate);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+}
+
+.admin-main {
+  min-width: 0;
+  padding-block: 1.5rem 3rem;
+}
+
+.admin-dashboard__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-block-end: 1.5rem;
+}
+
+.admin-dashboard__header > div > p:last-child {
+  margin-block: 0.35rem 0;
+  color: var(--color-text-muted);
+}
+
+.admin-dashboard__status {
+  flex: 0 0 auto;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+}
+
+.admin-metrics {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.admin-metric {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 8rem;
+  padding: 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  background: var(--color-surface);
+}
+
+.admin-metric__icon {
+  display: grid;
+  flex: 0 0 2.75rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-mist);
+  color: var(--color-ink);
+}
+
+.admin-metric p {
+  margin: 0 0 0.25rem;
+  color: var(--color-text-muted);
+}
+
+.admin-metric strong {
+  color: var(--color-text);
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.admin-state {
+  margin-block-start: 1.25rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.55rem;
+  background: var(--color-surface);
+}
+
+.admin-state--error {
+  border-color: var(--color-steel);
+  color: var(--color-text);
+}
+
+.admin-state--success {
+  border-color: var(--color-steel);
+  background: var(--color-surface-muted);
+}
+
+.doctor-form,
+.admin-list-section {
+  padding: 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  background: var(--color-surface);
+}
+
+.doctor-form {
+  margin-block-end: 1.5rem;
+}
+
+.doctor-form__heading {
+  margin-block-end: 1rem;
+}
+
+.doctor-form h2,
+.admin-list-section h2 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 1.25rem;
+}
+
+.doctor-form label {
+  display: grid;
+  gap: 0.35rem;
+  color: var(--color-text);
+  font-weight: 600;
+  text-align: start;
+}
+
+.doctor-form input,
+.doctor-form select,
+.doctor-form textarea {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.45rem;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.doctor-form textarea {
+  resize: vertical;
+}
+
+.doctor-form__bio {
+  grid-column: 1 / -1;
+}
+
+.admin-button {
+  min-height: 2.75rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--color-primary-strong);
+  border-radius: 0.45rem;
+  background: var(--color-primary-strong);
+  color: var(--color-on-primary);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.admin-button:hover {
+  background: var(--color-steel);
+}
+
+.admin-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.admin-button--muted {
+  border-color: var(--color-border);
+  background: transparent;
+  color: var(--color-text);
+}
+
+.admin-button--danger {
+  border-color: var(--color-steel);
+  background: transparent;
+  color: var(--color-text);
+}
+
+.admin-button--small {
+  min-height: 2.25rem;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.85rem;
+}
+
+.admin-list-section__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-block-end: 1rem;
+}
+
+.admin-list-section__heading > span {
+  min-width: 2rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  background: var(--color-mist);
+  color: var(--color-ink);
+  text-align: center;
+}
+
+.doctor-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.doctor-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.doctor-table th,
+.doctor-table td {
+  padding: 0.8rem;
+  border-block-end: 1px solid var(--color-border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.doctor-table th {
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+}
+
+.doctor-table__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.admin-appointment-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  background: var(--color-surface);
+}
+
+.admin-appointment-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-appointment-table th,
+.admin-appointment-table td {
+  padding: 0.85rem;
+  border-block-end: 1px solid var(--color-border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.admin-appointment-table th {
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+}
+
+.admin-appointment-table__barcode {
+  color: var(--color-text);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.doctor-table__photo {
+  width: 3.25rem;
+  height: 3.25rem;
+  margin-block-end: 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+
+.doctor-image-upload {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 8rem;
+}
+
+.doctor-image-upload__label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.25rem;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.45rem;
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.doctor-image-upload__label:hover {
+  background: var(--color-surface-muted);
+}
+
+.doctor-image-upload__label input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.doctor-image-upload__status {
+  color: var(--color-text-muted);
+  font-size: 0.72rem;
+  line-height: 1.3;
+}
+
+.doctor-image-upload__status--success {
+  color: var(--color-primary-strong);
+}
+
+.doctor-image-upload__status--error {
+  color: var(--color-text);
+}
+
+.patient-table {
+  table-layout: fixed;
+}
+
+.patient-table th:first-child,
+.patient-table td:first-child {
+  overflow-wrap: anywhere;
+}
+
+.patients-back-link {
+  display: inline-flex;
+  margin-block-start: 1.25rem;
+}
+
 button:focus-visible,
 a:focus-visible,
 input:focus-visible,
@@ -154,9 +552,37 @@ select:focus-visible {
   .responsive-form {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .admin-metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media (min-width: 64rem) {
+  .admin-layout {
+    grid-template-columns: 15rem minmax(0, 1fr);
+  }
+
+  .admin-sidebar {
+    position: sticky;
+    inset-block-start: 4.5rem;
+    height: calc(100dvh - 4.5rem);
+    padding: 1.5rem 1rem;
+  }
+
+  .admin-sidebar__nav {
+    display: grid;
+    overflow: visible;
+  }
+
+  .admin-sidebar__footer {
+    display: flex;
+  }
+
+  .admin-main {
+    padding-block: 2.5rem 4rem;
+  }
+
   .responsive-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.5rem;
@@ -177,6 +603,87 @@ select:focus-visible {
   .responsive-actions > button,
   .responsive-actions > a {
     flex: 1 1 100%;
+  }
+
+  .doctor-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .doctor-table,
+  .doctor-table tbody,
+  .doctor-table tr,
+  .doctor-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .doctor-table tr {
+    padding-block: 0.75rem;
+    border-block-end: 1px solid var(--color-border);
+  }
+
+  .doctor-table td {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    border: 0;
+    padding: 0.35rem 0;
+    text-align: end;
+  }
+
+  .doctor-table td::before {
+    content: attr(data-label);
+    color: var(--color-text-muted);
+    font-weight: 700;
+    text-align: start;
+  }
+
+  .doctor-table td:last-child {
+    display: block;
+    padding-block-start: 0.75rem;
+  }
+
+  .admin-appointment-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .admin-appointment-table,
+  .admin-appointment-table tbody,
+  .admin-appointment-table tr,
+  .admin-appointment-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .admin-appointment-table tr {
+    padding: 0.75rem;
+    border-block-end: 1px solid var(--color-border);
+  }
+
+  .admin-appointment-table td {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    border: 0;
+    padding: 0.35rem 0;
+    text-align: end;
+  }
+
+  .admin-appointment-table td::before {
+    content: attr(data-label);
+    color: var(--color-text-muted);
+    font-weight: 700;
+    text-align: start;
   }
 }
 

@@ -65,7 +65,9 @@
         "search": "بحث",
         "empty": "لا توجد نتائج",
         "success": "تمت العملية بنجاح",
-        "error": "حدث خطأ"
+        "error": "حدث خطأ",
+        "actions": "الإجراءات",
+        "details": "التفاصيل"
     },
     "errors": {
         "invalidCredentials": "بيانات الدخول غير صحيحة.",
@@ -81,6 +83,7 @@
     "patient": {
         "homeTitle": "اعثر على الطبيب المناسب",
         "doctors": "الأطباء",
+        "id": "المعرّف",
         "specialties": "التخصصات",
         "bookAppointment": "حجز موعد",
         "myAppointments": "مواعيدي",
@@ -116,6 +119,35 @@
         "image": "الصورة",
         "chooseImage": "اختر صورة",
         "maxSize": "الحجم الأقصى: 1 ميغابايت.",
-        "invalidFormat": "الصيغ المقبولة: PNG أو JPEG أو GIF أو WEBP."
+        "invalidFormat": "الصيغ المقبولة: PNG أو JPEG أو GIF أو WEBP.",
+        "fileTooLarge": "تتجاوز الصورة الحد الأقصى البالغ 1 ميغابايت.",
+        "noImage": "لا توجد صورة",
+        "success": "تم تحديث صورة الطبيب.",
+        "errors": {
+            "400": "الصورة مفقودة أو غير صالحة.",
+            "401": "جلستك غير مصرح بها.",
+            "403": "ليس لديك صلاحية لتحديث هذه الصورة.",
+            "404": "الطبيب غير موجود.",
+            "413": "تتجاوز الصورة الحد الأقصى البالغ 1 ميغابايت."
+        }
+    },
+    "admin": {
+        "doctorsDescription": "إدارة الأطباء ومعلوماتهم المهنية.",
+        "doctorList": "قائمة الأطباء",
+        "doctorPatientsTitle": "مرضى الطبيب",
+        "doctorPatientsDescription": "عرض المرضى المرتبطين بهذا الطبيب.",
+        "doctorPatientsLoaded": "قائمة المرضى متاحة.",
+        "noDoctorPatients": "لا يوجد مرضى مرتبطون بهذا الطبيب.",
+        "backToDoctors": "العودة إلى الأطباء",
+        "noDoctors": "لا يوجد أطباء مسجلون.",
+        "doctorSaved": "تم حفظ الطبيب بنجاح.",
+        "doctorDeleted": "تم حذف الطبيب بنجاح.",
+        "confirmDelete": "هل تريد حذف الطبيب {{name}}؟",
+        "appointmentsTitle": "متابعة المواعيد",
+        "appointmentsDescription": "راجع المواعيد المسجلة في المستشفى.",
+        "appointmentsLoaded": "البيانات محدثة",
+        "noAppointments": "لا توجد مواعيد مسجلة.",
+        "userSubtitle": "عرض وإدارة حسابات المستخدمين.",
+        "deleteUserConfirm": "هل تريد بالتأكيد حذف هذا المستخدم؟"
     }
 }
