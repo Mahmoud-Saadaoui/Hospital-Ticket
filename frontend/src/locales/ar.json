@@ -67,7 +67,9 @@
         "success": "تمت العملية بنجاح",
         "error": "حدث خطأ",
         "actions": "الإجراءات",
-        "details": "التفاصيل"
+        "details": "التفاصيل",
+        "previous": "السابق",
+        "next": "التالي"
     },
     "errors": {
         "invalidCredentials": "بيانات الدخول غير صحيحة.",

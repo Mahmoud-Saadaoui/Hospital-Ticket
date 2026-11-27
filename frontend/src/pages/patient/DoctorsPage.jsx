@@ -1,8 +1,10 @@
 import { Card, Container, Flex, Heading, Text } from "@radix-ui/themes";
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import DoctorCard from "../../components/doctors/DoctorCard";
 import SpecialtyFilter from "../../components/doctors/SpecialtyFilter";
+import Pagination from "../../components/common/Pagination";
 import {
   useDoctorsBySpecialty,
 } from "../../hooks/useDoctors";
@@ -12,12 +14,15 @@ import { SPECIALTIES } from "../../utils/specialties";
 const DoctorsPage = () => {
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
+  const [page, setPage] = useState(1);
   const specialties = SPECIALTIES;
   const selectedSpecialty = searchParams.get("specialty") || specialties[0];
-  const doctorsQuery = useDoctorsBySpecialty(selectedSpecialty);
+  const doctorsQuery = useDoctorsBySpecialty(selectedSpecialty, page, 10);
   const doctors = doctorsQuery.data?.data?.doctors ?? [];
+  const pagination = doctorsQuery.data?.data?.pagination;
 
   const handleSpecialtyChange = (specialty) => {
+    setPage(1);
     if (specialty) {
       setSearchParams({ specialty });
     } else {
@@ -73,6 +78,7 @@ const DoctorsPage = () => {
             ))}
           </div>
         )}
+        <Pagination pagination={pagination} onPageChange={setPage} />
       </Flex>
     </Container>
   );

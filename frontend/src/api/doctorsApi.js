@@ -7,10 +7,16 @@ export const getSpecialties = async () => {
   return response.data;
 };
 
-export const getDoctorsBySpecialty = async (specialty) => {
+export const getDoctorsBySpecialty = async (
+  specialty,
+  { page = 1, limit = 10 } = {}
+) => {
   const response = await axiosInstance.get(
     `/doctor/specialty/${encodeURIComponent(specialty)}`,
-    { skipAuth: true }
+    {
+      skipAuth: true,
+      params: { page, limit },
+    }
   );
   return response.data;
 };
@@ -27,8 +33,10 @@ export const createDoctor = async (payload) => {
   return response.data;
 };
 
-export const getDoctors = async () => {
-  const response = await axiosInstance.get("/doctor/doctors");
+export const getDoctors = async ({ page = 1, limit = 10 } = {}) => {
+  const response = await axiosInstance.get("/doctor/doctors", {
+    params: { page, limit },
+  });
   return response.data;
 };
 

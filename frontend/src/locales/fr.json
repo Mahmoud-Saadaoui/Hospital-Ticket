@@ -67,7 +67,9 @@
         "success": "Opération réussie",
         "error": "Une erreur est survenue",
         "actions": "Actions",
-        "details": "Détails"
+        "details": "Détails",
+        "previous": "Précédent",
+        "next": "Suivant"
     },
     "errors": {
         "invalidCredentials": "Identifiants invalides.",

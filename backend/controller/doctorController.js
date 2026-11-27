@@ -9,6 +9,32 @@ const fs = require("fs");
 const httpStatusText = require("../utils/httpStatusText");
 const AllowedSpecialties = require("../utils/specialties");
 
+const getPagination = (req) => {
+  const requestedPage = Number.parseInt(req.query.page, 10);
+  const requestedLimit = Number.parseInt(req.query.limit, 10);
+  const page = Number.isInteger(requestedPage) && requestedPage > 0
+    ? requestedPage
+    : 1;
+  const limit = Number.isInteger(requestedLimit) && requestedLimit > 0
+    ? Math.min(requestedLimit, 50)
+    : 10;
+
+  return {
+    page,
+    limit,
+    skip: (page - 1) * limit,
+  };
+};
+
+const buildPagination = (page, limit, total) => ({
+  page,
+  limit,
+  total,
+  pages: Math.ceil(total / limit),
+  hasNextPage: page * limit < total,
+  hasPreviousPage: page > 1,
+});
+
 /**
  *
  * @desc Create New Doctor
@@ -68,19 +94,17 @@ const createDoctor = async (req, res) => {
  */
 
 const getAllDoctor = async (req, res) => {
-  const doctors = await Doctor.find();
-  if (!doctors.length) {
-    return res.status(404).json({
-      status: httpStatusText.FAIL,
-      data: {
-        title: "doctor not found",
-      },
-    });
-  }
+  const { page, limit, skip } = getPagination(req);
+  const [doctors, total] = await Promise.all([
+    Doctor.find().sort({ fullName: 1 }).skip(skip).limit(limit),
+    Doctor.countDocuments(),
+  ]);
+
   res.status(200).json({
     status: httpStatusText.SUCCESS,
     data: {
       doctors,
+      pagination: buildPagination(page, limit, total),
     },
   });
 };
@@ -151,19 +175,20 @@ const getDoctorPatients = async (req, res) => {
 const getDoctorsBySpecialty = async (req, res) => {
   try {
     const { specialty } = req.params;
-    const doctors = await Doctor.find({ specialty });
-    if (!doctors.length) {
-      return res.status(404).json({
-        status: httpStatusText.FAIL,
-        data: {
-          title: "No specialty hashas been added yet",
-        },
-      });
-    }
+    const { page, limit, skip } = getPagination(req);
+    const [doctors, total] = await Promise.all([
+      Doctor.find({ specialty })
+        .sort({ fullName: 1 })
+        .skip(skip)
+        .limit(limit),
+      Doctor.countDocuments({ specialty }),
+    ]);
+
     res.status(200).json({
       status: httpStatusText.SUCCESS,
       data: {
         doctors,
+        pagination: buildPagination(page, limit, total),
       },
     });
   } catch (err) {

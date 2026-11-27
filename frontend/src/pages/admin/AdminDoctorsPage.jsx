@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Button, Dialog } from "@radix-ui/themes";
 import DoctorForm from "../../components/doctors/DoctorForm";
 import DoctorTable from "../../components/doctors/DoctorTable";
+import Pagination from "../../components/common/Pagination";
 import {
   useCreateDoctor,
   useDeleteDoctor,
@@ -16,16 +17,18 @@ const getDoctorsFromResponse = (response) =>
 
 function AdminDoctorsPage() {
   const { t } = useTranslation();
-  const doctorsQuery = useDoctors();
-  const createMutation = useCreateDoctor();
-  const updateMutation = useUpdateDoctor();
-  const deleteMutation = useDeleteDoctor();
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [doctorToDelete, setDoctorToDelete] = useState(null);
+  const [page, setPage] = useState(1);
   const [successMessage, setSuccessMessage] = useState("");
+  const doctorsQuery = useDoctors(page, 10);
+  const createMutation = useCreateDoctor();
+  const updateMutation = useUpdateDoctor();
+  const deleteMutation = useDeleteDoctor();
 
   const doctors = getDoctorsFromResponse(doctorsQuery.data);
+  const pagination = doctorsQuery.data?.data?.pagination;
   const queryStatus = getApiErrorStatus(doctorsQuery.error);
   const isEmpty = !doctorsQuery.isLoading && (doctors.length === 0 || queryStatus === 404);
   const mutation = selectedDoctor ? updateMutation : createMutation;
@@ -46,6 +49,7 @@ function AdminDoctorsPage() {
       }
       setSelectedDoctor(null);
       setIsFormOpen(false);
+      setPage(1);
       setSuccessMessage(t("admin.doctorSaved"));
     } catch {
       // The translated mutation error is displayed below the form.
@@ -215,6 +219,7 @@ function AdminDoctorsPage() {
         )}
 
         {!doctorsQuery.isLoading && !doctorsQuery.isError && doctors.length > 0 && (
+          <>
             <DoctorTable
               doctors={doctors}
               onEdit={(doctor) => {
@@ -224,9 +229,11 @@ function AdminDoctorsPage() {
                 updateMutation.reset();
                 setIsFormOpen(true);
               }}
-            onDelete={handleDelete}
-            isDeleting={deleteMutation.isPending}
-          />
+              onDelete={handleDelete}
+              isDeleting={deleteMutation.isPending}
+            />
+            <Pagination pagination={pagination} onPageChange={setPage} />
+          </>
         )}
 
         {deleteMutation.error && (

@@ -67,7 +67,9 @@
         "success": "Operation successful",
         "error": "An error occurred",
         "actions": "Actions",
-        "details": "Details"
+        "details": "Details",
+        "previous": "Previous",
+        "next": "Next"
     },
     "errors": {
         "invalidCredentials": "Invalid credentials.",

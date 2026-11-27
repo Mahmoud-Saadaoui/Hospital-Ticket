@@ -1,4 +1,5 @@
 import {
+  keepPreviousData,
   useMutation,
   useQuery,
   useQueryClient,
@@ -20,17 +21,19 @@ export const useSpecialties = () =>
     queryFn: getSpecialties,
   });
 
-export const useDoctorsBySpecialty = (specialty) =>
+export const useDoctorsBySpecialty = (specialty, page = 1, limit = 10) =>
   useQuery({
-    queryKey: ["doctors", "by-specialty", specialty],
-    queryFn: () => getDoctorsBySpecialty(specialty),
+    queryKey: ["doctors", "by-specialty", specialty, { page, limit }],
+    queryFn: () => getDoctorsBySpecialty(specialty, { page, limit }),
     enabled: Boolean(specialty),
+    placeholderData: keepPreviousData,
   });
 
-export const useDoctors = () =>
+export const useDoctors = (page = 1, limit = 10) =>
   useQuery({
-    queryKey: ["doctors", "all"],
-    queryFn: getDoctors,
+    queryKey: ["doctors", "all", { page, limit }],
+    queryFn: () => getDoctors({ page, limit }),
+    placeholderData: keepPreviousData,
   });
 
 export const useDoctorPatients = (doctorId) =>
