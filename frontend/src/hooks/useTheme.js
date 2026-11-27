@@ -51,10 +51,12 @@ const useTheme = () => {
       }
     };
 
-    darkQuery.addEventListener("change", changeHandler);
+    darkQuery.addEventListener?.("change", changeHandler);
+    darkQuery.addListener?.(changeHandler);
 
     return () => {
-      darkQuery.removeEventListener("change", changeHandler);
+      darkQuery.removeEventListener?.("change", changeHandler);
+      darkQuery.removeListener?.(changeHandler);
     };
   }, [theme]);
 

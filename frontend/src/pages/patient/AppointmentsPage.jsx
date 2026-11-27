@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import AppointmentCard from "../../components/appointments/AppointmentCard";
 import useAuth from "../../hooks/useAuth";
 import { usePatientAppointments } from "../../hooks/useAppointments";
-import getApiError, { getApiErrorStatus } from "../../utils/apiError";
+import { getApiErrorMessage, getApiErrorStatus } from "../../utils/apiError";
 
 const AppointmentsPage = () => {
   const { t } = useTranslation();
@@ -13,7 +13,7 @@ const AppointmentsPage = () => {
   const isEmptyResponse =
     getApiErrorStatus(appointmentsQuery.error) === 404;
   const errorMessage = appointmentsQuery.error
-    ? getApiError(appointmentsQuery.error, t("errors.generic")).message
+    ? getApiErrorMessage(appointmentsQuery.error, t("errors.generic"), t)
     : "";
 
   return (

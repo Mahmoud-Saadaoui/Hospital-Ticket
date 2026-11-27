@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { EnvelopeClosedIcon, LockClosedIcon } from '@radix-ui/react-icons';
 import useAuth from '../hooks/useAuth';
-import getApiError from '../utils/apiError';
+import { getApiErrorMessage } from "../utils/apiError";
 
 const Login = () => {
   const { t } = useTranslation();
@@ -26,12 +26,7 @@ const Login = () => {
       const destination = location.state?.from?.pathname || '/';
       navigate(destination, { replace: true });
     } catch (error) {
-      setErrorMessage(
-        getApiError(
-          error,
-          t('errors.invalidCredentials')
-        ).message
-      );
+      setErrorMessage(getApiErrorMessage(error, t("errors.invalidCredentials"), t));
     } finally {
       setIsSubmitting(false);
     }
@@ -42,7 +37,7 @@ const Login = () => {
       <Flex direction="column" align="center" justify="center" style={{ minHeight: '70vh' }}>
         <Card size="4" style={{ width: '100%', maxWidth: '420px' }}>
           <Box p="4">
-            <Text size="6" weight="bold" as="h1" style={{ marginBottom: '24px', textAlign: 'center' }}>
+            <Text size="6" weight="bold" as="h1" style={{ marginBlockEnd: '24px', textAlign: 'center' }}>
               {t('auth.loginTitle')}
             </Text>
 
@@ -59,7 +54,7 @@ const Login = () => {
                     htmlFor="login-email"
                     size="2"
                     weight="medium"
-                    style={{ display: 'block', marginBottom: '6px' }}
+                     style={{ display: 'block', marginBlockEnd: '6px' }}
                   >
                     {t('auth.emailLabel')}
                   </Text>
@@ -85,7 +80,7 @@ const Login = () => {
                     htmlFor="login-password"
                     size="2"
                     weight="medium"
-                    style={{ display: 'block', marginBottom: '6px' }}
+                     style={{ display: 'block', marginBlockEnd: '6px' }}
                   >
                     {t('auth.passwordLabel')}
                   </Text>
@@ -108,7 +103,7 @@ const Login = () => {
                 <Button
                   type="submit"
                   size="3"
-                  style={{ width: '100%', marginTop: '12px' }}
+                   style={{ width: '100%', marginBlockStart: '12px' }}
                   disabled={isSubmitting}
                   aria-busy={isSubmitting}
                 >

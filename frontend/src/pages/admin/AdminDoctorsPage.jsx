@@ -27,7 +27,7 @@ function AdminDoctorsPage() {
   const isEmpty = !doctorsQuery.isLoading && (doctors.length === 0 || queryStatus === 404);
   const mutation = selectedDoctor ? updateMutation : createMutation;
   const mutationError = mutation.error
-    ? getApiErrorMessage(mutation.error, t("common.error"))
+    ? getApiErrorMessage(mutation.error, t("common.error"), t)
     : "";
 
   const handleSubmit = async (payload) => {
@@ -107,7 +107,7 @@ function AdminDoctorsPage() {
 
         {doctorsQuery.isError && queryStatus !== 404 && (
           <p className="admin-state admin-state--error" role="alert">
-            {getApiErrorMessage(doctorsQuery.error, t("common.error"))}
+            {getApiErrorMessage(doctorsQuery.error, t("common.error"), t)}
           </p>
         )}
 
@@ -128,7 +128,7 @@ function AdminDoctorsPage() {
 
         {deleteMutation.error && (
           <p className="admin-state admin-state--error" role="alert">
-            {getApiErrorMessage(deleteMutation.error, t("common.error"))}
+            {getApiErrorMessage(deleteMutation.error, t("common.error"), t)}
           </p>
         )}
       </section>

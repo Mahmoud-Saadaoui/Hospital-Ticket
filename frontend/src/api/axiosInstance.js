@@ -31,6 +31,27 @@ const isAuthRequest = (url = "") =>
   url.includes("/auth/refresh") ||
   url.includes("/auth/logout");
 
+const isAccessTokenExpired = (token) => {
+  if (!token) {
+    return false;
+  }
+
+  try {
+    const encodedPayload = token.split(".")[1];
+    if (!encodedPayload) {
+      return false;
+    }
+
+    const payload = JSON.parse(
+      window.atob(encodedPayload.replace(/-/g, "+").replace(/_/g, "/"))
+    );
+
+    return typeof payload.exp === "number" && payload.exp * 1000 <= Date.now();
+  } catch {
+    return false;
+  }
+};
+
 const notifySessionExpired = () => {
   clearAccessToken();
   window.dispatchEvent(new Event("auth:session-expired"));
@@ -54,8 +75,12 @@ axiosInstance.interceptors.response.use(
     const originalRequest = error.config;
     const status = error.response?.status;
 
+    const shouldRefresh =
+      status === 401 ||
+      (status === 403 && isAccessTokenExpired(accessToken));
+
     if (
-      status !== 401 ||
+      !shouldRefresh ||
       !originalRequest ||
       originalRequest._retry ||
       isAuthRequest(originalRequest.url) ||

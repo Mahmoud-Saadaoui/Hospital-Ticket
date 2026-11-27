@@ -11,7 +11,7 @@ const Footer = () => {
       style={{
         borderTop: '1px solid var(--color-border)',
         backgroundColor: 'var(--color-surface)',
-        marginTop: 'auto',
+         marginBlockStart: 'auto',
       }}
     >
       <footer>

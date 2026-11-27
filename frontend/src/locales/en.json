@@ -71,10 +71,12 @@
     },
     "errors": {
         "invalidCredentials": "Invalid credentials.",
+        "invalidRequest": "The request is invalid.",
         "unauthorized": "Your session is not authorized.",
         "forbidden": "You do not have permission to perform this action.",
         "notFound": "The requested resource was not found.",
         "conflict": "This resource already exists or is already booked.",
+        "userAlreadyExists": "This user already exists.",
         "tooLarge": "The file is too large.",
         "tooManyRequests": "Too many attempts. Try again later.",
         "network": "The server is unreachable.",

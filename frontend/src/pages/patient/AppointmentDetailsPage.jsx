@@ -5,7 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import { usePatientAppointments } from "../../hooks/useAppointments";
 import { formatDateTime } from "../../utils/date";
 import { getBarcodeImageSource } from "../../utils/barcode";
-import getApiError, { getApiErrorStatus } from "../../utils/apiError";
+import { getApiErrorMessage, getApiErrorStatus } from "../../utils/apiError";
 
 const AppointmentDetailsPage = () => {
   const { t, i18n } = useTranslation();
@@ -36,7 +36,7 @@ const AppointmentDetailsPage = () => {
   if (!appointment) {
     const isEmptyResponse = getApiErrorStatus(appointmentsQuery.error) === 404;
     const errorMessage = appointmentsQuery.error
-      ? getApiError(appointmentsQuery.error, t("errors.generic")).message
+      ? getApiErrorMessage(appointmentsQuery.error, t("errors.generic"), t)
       : "";
 
     return (

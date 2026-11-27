@@ -38,7 +38,7 @@ function AdminAppointmentsPage() {
 
       {appointmentsQuery.isError && status !== 404 && (
         <p className="admin-state admin-state--error" role="alert">
-          {getApiErrorMessage(appointmentsQuery.error, t("common.error"))}
+          {getApiErrorMessage(appointmentsQuery.error, t("common.error"), t)}
         </p>
       )}
 

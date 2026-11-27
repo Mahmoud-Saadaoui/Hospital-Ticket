@@ -39,7 +39,7 @@ function DoctorPatientsPage() {
 
         {patientsQuery.isError && (
           <p className="admin-state admin-state--error" role="alert">
-            {getApiErrorMessage(patientsQuery.error, t("common.error"))}
+            {getApiErrorMessage(patientsQuery.error, t("common.error"), t)}
           </p>
         )}
 

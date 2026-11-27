@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { PersonIcon, EnvelopeClosedIcon, LockClosedIcon } from '@radix-ui/react-icons';
 import useAuth from '../hooks/useAuth';
-import getApiError from '../utils/apiError';
+import { getApiErrorMessage } from "../utils/apiError";
 
 const Register = () => {
   const { t } = useTranslation();
@@ -26,9 +26,7 @@ const Register = () => {
       await register({ name, email, phone, password });
       navigate('/', { replace: true });
     } catch (error) {
-      setErrorMessage(
-        getApiError(error, t('errors.generic')).message
-      );
+      setErrorMessage(getApiErrorMessage(error, t("errors.generic"), t));
     } finally {
       setIsSubmitting(false);
     }
@@ -39,7 +37,7 @@ const Register = () => {
       <Flex direction="column" align="center" justify="center" style={{ minHeight: '70vh' }}>
         <Card size="4" style={{ width: '100%', maxWidth: '420px' }}>
           <Box p="4">
-            <Text size="6" weight="bold" as="h1" style={{ marginBottom: '24px', textAlign: 'center' }}>
+            <Text size="6" weight="bold" as="h1" style={{ marginBlockEnd: '24px', textAlign: 'center' }}>
               {t('auth.registerTitle')}
             </Text>
 
@@ -56,7 +54,7 @@ const Register = () => {
                     htmlFor="register-name"
                     size="2"
                     weight="medium"
-                    style={{ display: 'block', marginBottom: '6px' }}
+                     style={{ display: 'block', marginBlockEnd: '6px' }}
                   >
                     {t('auth.nameLabel')}
                   </Text>
@@ -81,7 +79,7 @@ const Register = () => {
                     htmlFor="register-phone"
                     size="2"
                     weight="medium"
-                    style={{ display: 'block', marginBottom: '6px' }}
+                     style={{ display: 'block', marginBlockEnd: '6px' }}
                   >
                     {t('auth.phoneLabel')}
                   </Text>
@@ -102,7 +100,7 @@ const Register = () => {
                     htmlFor="register-email"
                     size="2"
                     weight="medium"
-                    style={{ display: 'block', marginBottom: '6px' }}
+                     style={{ display: 'block', marginBlockEnd: '6px' }}
                   >
                     {t('auth.emailLabel')}
                   </Text>
@@ -127,7 +125,7 @@ const Register = () => {
                     htmlFor="register-password"
                     size="2"
                     weight="medium"
-                    style={{ display: 'block', marginBottom: '6px' }}
+                     style={{ display: 'block', marginBlockEnd: '6px' }}
                   >
                     {t('auth.passwordLabel')}
                   </Text>
@@ -149,7 +147,7 @@ const Register = () => {
                 <Button
                   type="submit"
                   size="3"
-                  style={{ width: '100%', marginTop: '12px' }}
+                   style={{ width: '100%', marginBlockStart: '12px' }}
                   disabled={isSubmitting}
                   aria-busy={isSubmitting}
                 >

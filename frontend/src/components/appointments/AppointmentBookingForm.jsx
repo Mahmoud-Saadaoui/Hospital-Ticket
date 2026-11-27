@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import useAuth from "../../hooks/useAuth";
 import { useCreateAppointment } from "../../hooks/useAppointments";
 import { getAppointmentSlots } from "../../utils/appointmentSlots";
-import getApiError from "../../utils/apiError";
+import { getApiErrorMessage } from "../../utils/apiError";
 
 const getTodayValue = () => {
   const today = new Date();
@@ -134,10 +134,11 @@ const AppointmentBookingForm = ({ doctorId }) => {
 
             {createAppointment.isError && (
               <Text color="red" role="alert">
-                {getApiError(
+                {getApiErrorMessage(
                   createAppointment.error,
-                  t("errors.generic")
-                ).message}
+                  t("errors.generic"),
+                  t
+                )}
               </Text>
             )}
 

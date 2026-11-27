@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { formatDateTime } from "../../utils/date";
 import { getBarcodeImageSource } from "../../utils/barcode";
 import { useCancelAppointment } from "../../hooks/useAppointments";
-import getApiError from "../../utils/apiError";
+import { getApiErrorMessage } from "../../utils/apiError";
 
 const AppointmentCard = ({ appointment }) => {
   const { t, i18n } = useTranslation();
@@ -67,10 +67,7 @@ const AppointmentCard = ({ appointment }) => {
           </Button>
           {cancelMutation.isError && (
             <Text color="red" role="alert">
-              {getApiError(
-                cancelMutation.error,
-                t("errors.generic")
-              ).message}
+              {getApiErrorMessage(cancelMutation.error, t("errors.generic"), t)}
             </Text>
           )}
           <Button

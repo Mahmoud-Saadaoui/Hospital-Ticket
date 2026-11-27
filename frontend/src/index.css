@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap");
 
 :root {
+  color-scheme: light;
   --color-ice: #e0fbfc;
   --color-mist: #c2dfe3;
   --color-slate: #9db4c0;
@@ -21,6 +22,7 @@
 }
 
 :root.dark {
+  color-scheme: dark;
   --color-bg: #182428;
   --color-surface: var(--color-ink);
   --color-surface-muted: #34454b;

@@ -406,7 +406,7 @@
 
 ## Étape 9 — Qualité, accessibilité et cas limites
 
-- [ ] **9.1 — Ajouter les composants d’état communs**
+- [x] **9.1 — Ajouter les composants d’état communs**
   - Fichiers à créer : `frontend/src/components/common/LoadingState.jsx`, `frontend/src/components/common/ErrorState.jsx`, `frontend/src/components/common/EmptyState.jsx`.
   - Critères d’acceptation :
     - Les pages n’affichent jamais une zone vide silencieuse pendant une requête.
@@ -414,7 +414,7 @@
     - Les boutons de retry sont accessibles.
     - Les états respectent light/dark et la palette.
 
-- [ ] **9.2 — Vérifier les cas d’authentification**
+- [x] **9.2 — Vérifier les cas d’authentification**
   - Fichiers concernés : `frontend/src/context/AuthContext.jsx`, `frontend/src/api/axiosInstance.js`, `frontend/src/routes.jsx`.
   - Critères d’acceptation :
     - Absence de cookie refresh.
@@ -424,7 +424,7 @@
     - Logout `200` avec `status: "fail"` et `title: "Logout success"`.
     - Un utilisateur non-admin ne voit pas les pages admin.
 
-- [ ] **9.3 — Vérifier les cas API métier**
+- [x] **9.3 — Vérifier les cas API métier**
   - Fichiers concernés : hooks, pages et `frontend/src/utils/apiError.js`.
   - Critères d’acceptation :
     - Les enveloppes `data.title`, `message`, `status` et statuts HTTP sont correctement décodées.
@@ -433,7 +433,7 @@
     - `Doctor.fullName` est utilisé partout.
     - Les erreurs `409` de doublon et de créneau réservé sont lisibles.
 
-- [ ] **9.4 — Audit responsive**
+- [x] **9.4 — Audit responsive**
   - Fichiers à vérifier : `frontend/src/index.css`, toutes les pages et tous les composants visuels.
   - Critères d’acceptation :
     - Tests à 320 px, 768 px et desktop.
@@ -441,7 +441,7 @@
     - Les tableaux basculent correctement vers cartes ou scroll.
     - Les modales et boutons restent utilisables au tactile.
 
-- [ ] **9.5 — Audit thème et RTL**
+- [x] **9.5 — Audit thème et RTL**
   - Fichiers à vérifier : `frontend/src/hooks/useTheme.js`, `frontend/src/main.jsx`, `frontend/src/index.css`, traductions et composants.
   - Critères d’acceptation :
     - Light, dark et system fonctionnent après navigation.
