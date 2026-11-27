@@ -5,6 +5,7 @@ import { formatDateTime } from "../../utils/date";
 import { getBarcodeImageSource } from "../../utils/barcode";
 import { useCancelAppointment } from "../../hooks/useAppointments";
 import { getApiErrorMessage } from "../../utils/apiError";
+import { getSpecialtyLabel } from "../../utils/specialties";
 
 const AppointmentCard = ({ appointment }) => {
   const { t, i18n } = useTranslation();
@@ -36,7 +37,9 @@ const AppointmentCard = ({ appointment }) => {
             {appointment.doctor?.fullName || t("doctor.fullName")}
           </Text>
           <Text color="gray">
-            {appointment.doctor?.specialty || t("doctor.specialty")}
+            {appointment.doctor?.specialty
+              ? getSpecialtyLabel(appointment.doctor.specialty, t)
+              : t("doctor.specialty")}
           </Text>
         </Flex>
 

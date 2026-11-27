@@ -6,6 +6,7 @@ import { usePatientAppointments } from "../../hooks/useAppointments";
 import { formatDateTime } from "../../utils/date";
 import { getBarcodeImageSource } from "../../utils/barcode";
 import { getApiErrorMessage, getApiErrorStatus } from "../../utils/apiError";
+import { getSpecialtyLabel } from "../../utils/specialties";
 
 const AppointmentDetailsPage = () => {
   const { t, i18n } = useTranslation();
@@ -76,7 +77,9 @@ const AppointmentDetailsPage = () => {
               {appointment.doctor?.fullName || t("doctor.fullName")}
             </Text>
             <Text color="gray">
-              {appointment.doctor?.specialty || t("doctor.specialty")}
+              {appointment.doctor?.specialty
+                ? getSpecialtyLabel(appointment.doctor.specialty, t)
+                : t("doctor.specialty")}
             </Text>
             <Text>
               {t("appointment.date")}:{" "}

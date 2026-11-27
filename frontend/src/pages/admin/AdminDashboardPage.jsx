@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useAllAppointments } from "../../hooks/useAppointments";
 import { useDoctors } from "../../hooks/useDoctors";
 import { useUsers } from "../../hooks/useUsers";
-import getApiError from "../../utils/apiError";
+import getApiError, { getApiErrorStatus } from "../../utils/apiError";
 
 const getCount = (response, key) => response?.data?.[key]?.length ?? 0;
 
@@ -14,7 +14,11 @@ const AdminDashboardPage = () => {
   const appointmentsQuery = useAllAppointments();
   const queries = [doctorsQuery, usersQuery, appointmentsQuery];
   const isLoading = queries.some((query) => query.isLoading);
-  const firstError = queries.find((query) => query.isError);
+  const isEmptyQuery = (query) =>
+    [400, 404].includes(getApiErrorStatus(query.error));
+  const firstError = queries.find(
+    (query) => query.isError && !isEmptyQuery(query)
+  );
 
   const cards = [
     { label: t("admin.doctors"), count: getCount(doctorsQuery.data, "doctors") },

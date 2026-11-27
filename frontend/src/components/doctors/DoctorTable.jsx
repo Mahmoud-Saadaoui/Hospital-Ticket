@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import DoctorImageUpload from "./DoctorImageUpload";
+import { getSpecialtyLabel } from "../../utils/specialties";
 
 function DoctorTable({ doctors, onEdit, onDelete, isDeleting }) {
   const { t } = useTranslation();
@@ -36,7 +37,9 @@ function DoctorTable({ doctors, onEdit, onDelete, isDeleting }) {
                   <DoctorImageUpload doctor={doctor} />
                 </td>
                 <td data-label={t("doctor.fullName")}>{doctor.fullName}</td>
-                <td data-label={t("doctor.specialty")}>{doctor.specialty}</td>
+                <td data-label={t("doctor.specialty")}>
+                  {getSpecialtyLabel(doctor.specialty, t)}
+                </td>
                 <td data-label={t("doctor.email")}>{doctor.email}</td>
                 <td data-label={t("doctor.phone")}>{doctor.phone}</td>
                 <td data-label={t("common.edit")}>

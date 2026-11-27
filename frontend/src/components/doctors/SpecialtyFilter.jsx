@@ -1,5 +1,6 @@
 import { Text } from "@radix-ui/themes";
 import { useTranslation } from "react-i18next";
+import { getSpecialtyLabel } from "../../utils/specialties";
 
 const SpecialtyFilter = ({ specialties, value, onChange }) => {
   const { t } = useTranslation();
@@ -24,7 +25,7 @@ const SpecialtyFilter = ({ specialties, value, onChange }) => {
         <option value="">{t("common.search")}</option>
         {specialties.map((specialty) => (
           <option key={specialty} value={specialty}>
-            {specialty}
+            {getSpecialtyLabel(specialty, t)}
           </option>
         ))}
       </select>

@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { formatDateTime } from "../../utils/date";
+import { getSpecialtyLabel } from "../../utils/specialties";
 
 function AdminAppointmentTable({ appointments, locale }) {
   const { t } = useTranslation();
@@ -30,7 +31,9 @@ function AdminAppointmentTable({ appointments, locale }) {
                 {appointment.doctor?.fullName || t("doctor.fullName")}
               </td>
               <td data-label={t("doctor.specialty")}>
-                {appointment.doctor?.specialty || t("doctor.specialty")}
+                {appointment.doctor?.specialty
+                  ? getSpecialtyLabel(appointment.doctor.specialty, t)
+                  : t("doctor.specialty")}
               </td>
             </tr>
           ))}

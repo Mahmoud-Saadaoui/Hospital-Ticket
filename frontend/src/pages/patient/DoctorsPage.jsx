@@ -5,17 +5,15 @@ import DoctorCard from "../../components/doctors/DoctorCard";
 import SpecialtyFilter from "../../components/doctors/SpecialtyFilter";
 import {
   useDoctorsBySpecialty,
-  useSpecialties,
 } from "../../hooks/useDoctors";
 import getApiError from "../../utils/apiError";
+import { SPECIALTIES } from "../../utils/specialties";
 
 const DoctorsPage = () => {
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const specialtiesQuery = useSpecialties();
-  const specialties = specialtiesQuery.data?.data?.specialties ?? [];
-  const selectedSpecialty =
-    searchParams.get("specialty") || specialties[0] || "";
+  const specialties = SPECIALTIES;
+  const selectedSpecialty = searchParams.get("specialty") || specialties[0];
   const doctorsQuery = useDoctorsBySpecialty(selectedSpecialty);
   const doctors = doctorsQuery.data?.data?.doctors ?? [];
 
@@ -27,9 +25,6 @@ const DoctorsPage = () => {
     }
   };
 
-  const specialtiesError = specialtiesQuery.error
-    ? getApiError(specialtiesQuery.error, t("errors.generic")).message
-    : "";
   const doctorsError = doctorsQuery.error
     ? getApiError(doctorsQuery.error, t("errors.generic")).message
     : "";
@@ -43,18 +38,6 @@ const DoctorsPage = () => {
           </Heading>
           <Text color="gray">{t("patient.bookAppointment")}</Text>
         </Flex>
-
-        {specialtiesQuery.isLoading && (
-          <Text role="status" aria-live="polite">
-            {t("common.loading")}
-          </Text>
-        )}
-
-        {specialtiesQuery.isError && (
-          <Card role="alert">
-            <Text color="red">{specialtiesError}</Text>
-          </Card>
-        )}
 
         {specialties.length > 0 && (
           <SpecialtyFilter

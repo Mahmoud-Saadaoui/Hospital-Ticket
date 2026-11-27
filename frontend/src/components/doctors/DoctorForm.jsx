@@ -1,12 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-
-const SPECIALTIES = [
-  "Dental",
-  "Children",
-  "Cardiology",
-  "Opthalmology",
-];
+import { SPECIALTIES, getSpecialtyLabel } from "../../utils/specialties";
 
 const emptyDoctor = {
   fullName: "",
@@ -74,7 +68,7 @@ function DoctorForm({ doctor, isSaving, errorMessage, onSubmit, onCancel }) {
           >
             {SPECIALTIES.map((specialty) => (
               <option key={specialty} value={specialty}>
-                {specialty}
+                {getSpecialtyLabel(specialty, t)}
               </option>
             ))}
           </select>

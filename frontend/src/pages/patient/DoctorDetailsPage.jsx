@@ -2,6 +2,7 @@ import { Avatar, Card, Container, Flex, Heading, Text } from "@radix-ui/themes";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import AppointmentBookingForm from "../../components/appointments/AppointmentBookingForm";
+import { getSpecialtyLabel } from "../../utils/specialties";
 
 const DoctorDetailsPage = () => {
   const { t } = useTranslation();
@@ -54,7 +55,9 @@ const DoctorDetailsPage = () => {
                 <Heading size="6" as="h1">
                   {doctor.fullName}
                 </Heading>
-                <Text color="gray">{doctor.specialty}</Text>
+                <Text color="gray">
+                  {getSpecialtyLabel(doctor.specialty, t)}
+                </Text>
               </Flex>
             </Flex>
             {doctor.bio && <Text>{doctor.bio}</Text>}

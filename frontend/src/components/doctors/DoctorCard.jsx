@@ -1,6 +1,7 @@
 import { Avatar, Button, Card, Flex, Text } from "@radix-ui/themes";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { getSpecialtyLabel } from "../../utils/specialties";
 
 const DoctorCard = ({ doctor }) => {
   const { t } = useTranslation();
@@ -32,7 +33,7 @@ const DoctorCard = ({ doctor }) => {
               {doctor.fullName}
             </Text>
             <Text size="2" color="gray">
-              {doctor.specialty}
+              {getSpecialtyLabel(doctor.specialty, t)}
             </Text>
           </Flex>
         </Flex>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Button, Dialog } from "@radix-ui/themes";
 import DoctorForm from "../../components/doctors/DoctorForm";
 import DoctorTable from "../../components/doctors/DoctorTable";
 import {
@@ -20,6 +21,8 @@ function AdminDoctorsPage() {
   const updateMutation = useUpdateDoctor();
   const deleteMutation = useDeleteDoctor();
   const [selectedDoctor, setSelectedDoctor] = useState(null);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [doctorToDelete, setDoctorToDelete] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
 
   const doctors = getDoctorsFromResponse(doctorsQuery.data);
@@ -42,24 +45,42 @@ function AdminDoctorsPage() {
         await createMutation.mutateAsync(payload);
       }
       setSelectedDoctor(null);
+      setIsFormOpen(false);
       setSuccessMessage(t("admin.doctorSaved"));
     } catch {
       // The translated mutation error is displayed below the form.
     }
   };
 
-  const handleDelete = async (doctor) => {
-    const doctorId = doctor._id || doctor.id;
-    if (!window.confirm(t("admin.confirmDelete", { name: doctor.fullName }))) {
+  const handleFormOpenChange = (open) => {
+    setIsFormOpen(open);
+
+    if (!open) {
+      setSelectedDoctor(null);
+      createMutation.reset();
+      updateMutation.reset();
+    }
+  };
+
+  const handleDelete = (doctor) => {
+    setDoctorToDelete(doctor);
+    setSuccessMessage("");
+    deleteMutation.reset();
+  };
+
+  const confirmDelete = async () => {
+    const doctorId = doctorToDelete?._id || doctorToDelete?.id;
+
+    if (!doctorId) {
       return;
     }
 
-    setSuccessMessage("");
     try {
       await deleteMutation.mutateAsync(doctorId);
       if ((selectedDoctor?._id || selectedDoctor?.id) === doctorId) {
         setSelectedDoctor(null);
       }
+      setDoctorToDelete(null);
       setSuccessMessage(t("admin.doctorDeleted"));
     } catch {
       // The translated mutation error is displayed in the page state.
@@ -74,6 +95,18 @@ function AdminDoctorsPage() {
           <h2>{t("patient.doctors")}</h2>
           <p>{t("admin.doctorsDescription")}</p>
         </div>
+        <Button
+          type="button"
+          onClick={() => {
+            setSelectedDoctor(null);
+            setSuccessMessage("");
+            createMutation.reset();
+            updateMutation.reset();
+            setIsFormOpen(true);
+          }}
+        >
+          {t("doctor.create")}
+        </Button>
       </header>
 
       {successMessage && (
@@ -82,14 +115,78 @@ function AdminDoctorsPage() {
         </p>
       )}
 
-      <DoctorForm
-        key={selectedDoctor?._id || selectedDoctor?.id || "new"}
-        doctor={selectedDoctor}
-        isSaving={mutation.isPending}
-        errorMessage={mutationError}
-        onSubmit={handleSubmit}
-        onCancel={() => setSelectedDoctor(null)}
-      />
+      <Dialog.Root open={isFormOpen} onOpenChange={handleFormOpenChange}>
+        <Dialog.Content maxWidth="650px">
+          <Dialog.Title>
+            {selectedDoctor ? t("doctor.update") : t("doctor.create")}
+          </Dialog.Title>
+          <Dialog.Description size="2" mb="4">
+            {t("admin.doctorsDescription")}
+          </Dialog.Description>
+          <DoctorForm
+            key={selectedDoctor?._id || selectedDoctor?.id || "new"}
+            doctor={selectedDoctor}
+            isSaving={mutation.isPending}
+            errorMessage={mutationError}
+            onSubmit={handleSubmit}
+            onCancel={() => handleFormOpenChange(false)}
+          />
+        </Dialog.Content>
+      </Dialog.Root>
+
+      <Dialog.Root
+        open={Boolean(doctorToDelete)}
+        onOpenChange={(open) => {
+          if (!open && !deleteMutation.isPending) {
+            setDoctorToDelete(null);
+            deleteMutation.reset();
+          }
+        }}
+      >
+        <Dialog.Content maxWidth="450px">
+          <Dialog.Title>{t("common.delete")}</Dialog.Title>
+          <Dialog.Description size="2" mb="4">
+            {doctorToDelete
+              ? t("admin.confirmDelete", { name: doctorToDelete.fullName })
+              : ""}
+          </Dialog.Description>
+
+          {deleteMutation.error && (
+            <p className="admin-state admin-state--error" role="alert">
+              {getApiErrorMessage(
+                deleteMutation.error,
+                t("common.error"),
+                t
+              )}
+            </p>
+          )}
+
+          <div className="responsive-actions">
+            <Button
+              type="button"
+              variant="soft"
+              onClick={() => {
+                setDoctorToDelete(null);
+                deleteMutation.reset();
+              }}
+              disabled={deleteMutation.isPending}
+            >
+              {t("common.cancel")}
+            </Button>
+            <Button
+              type="button"
+              color="red"
+              onClick={confirmDelete}
+              disabled={deleteMutation.isPending}
+              aria-busy={deleteMutation.isPending}
+            >
+              {deleteMutation.isPending
+                ? t("common.loading")
+                : t("common.delete")}
+            </Button>
+          </div>
+        </Dialog.Content>
+      </Dialog.Root>
 
       <section className="admin-list-section" aria-labelledby="doctor-list-title">
         <div className="admin-list-section__heading">
@@ -118,9 +215,15 @@ function AdminDoctorsPage() {
         )}
 
         {!doctorsQuery.isLoading && !doctorsQuery.isError && doctors.length > 0 && (
-          <DoctorTable
-            doctors={doctors}
-            onEdit={setSelectedDoctor}
+            <DoctorTable
+              doctors={doctors}
+              onEdit={(doctor) => {
+                setSelectedDoctor(doctor);
+                setSuccessMessage("");
+                createMutation.reset();
+                updateMutation.reset();
+                setIsFormOpen(true);
+              }}
             onDelete={handleDelete}
             isDeleting={deleteMutation.isPending}
           />

@@ -10,16 +10,11 @@ import {
 } from '@radix-ui/themes';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { useSpecialties } from '../hooks/useDoctors';
-import getApiError from '../utils/apiError';
+import { SPECIALTIES, getSpecialtyLabel } from '../utils/specialties';
 
 const Home = () => {
   const { t } = useTranslation();
-  const specialtiesQuery = useSpecialties();
-  const specialties = specialtiesQuery.data?.data?.specialties ?? [];
-  const errorMessage = specialtiesQuery.error
-    ? getApiError(specialtiesQuery.error, t('errors.generic')).message
-    : '';
+  const specialties = SPECIALTIES;
 
   return (
     <Container size="4" py={{ initial: '6', sm: '9' }}>
@@ -70,29 +65,9 @@ const Home = () => {
             {t('patient.specialties')}
           </Heading>
 
-          {specialtiesQuery.isLoading && (
-            <Text role="status" aria-live="polite">
-              {t('common.loading')}
-            </Text>
-          )}
-
-          {specialtiesQuery.isError && (
-            <Card
-              role="alert"
-              style={{
-                backgroundColor: 'var(--color-surface)',
-                border: '1px solid var(--color-border)',
-              }}
-            >
-              <Text color="red">{errorMessage}</Text>
-            </Card>
-          )}
-
-          {!specialtiesQuery.isLoading &&
-            !specialtiesQuery.isError &&
-            specialties.length === 0 && (
+          {specialties.length === 0 && (
               <Text color="gray">{t('common.empty')}</Text>
-            )}
+          )}
 
           {specialties.length > 0 && (
             <Grid
@@ -117,7 +92,7 @@ const Home = () => {
                   >
                     <Flex direction="column" gap="2" p="4">
                       <Text size="4" weight="bold">
-                        {specialty}
+                        {getSpecialtyLabel(specialty, t)}
                       </Text>
                       <Text size="2" color="gray">
                         {t('patient.doctors')}
