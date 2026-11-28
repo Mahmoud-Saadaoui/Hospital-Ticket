@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
   Avatar,
-  Button,
   Card,
   Container,
   Flex,
@@ -14,6 +13,7 @@ import { EnvelopeClosedIcon, PersonIcon } from "@radix-ui/react-icons";
 import useAuth from "../hooks/useAuth";
 import { useUpdateUser, useUploadUserImage } from "../hooks/useUsers";
 import getApiError from "../utils/apiError";
+import LoadingButton from "../components/common/LoadingButton";
 
 const MAX_IMAGE_SIZE = 1024 * 1024;
 const ACCEPTED_IMAGE_TYPES = [
@@ -192,15 +192,12 @@ const Profile = () => {
                   />
                 </label>
 
-                <Button
+                <LoadingButton
                   type="submit"
-                  disabled={updateUser.isPending}
-                  aria-busy={updateUser.isPending}
+                  loading={updateUser.isPending}
                 >
-                  {updateUser.isPending
-                    ? t("common.loading")
-                    : t("common.save")}
-                </Button>
+                  {t("common.save")}
+                </LoadingButton>
               </Flex>
             </form>
           </Flex>

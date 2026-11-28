@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import DoctorCard from "../../components/doctors/DoctorCard";
 import SpecialtyFilter from "../../components/doctors/SpecialtyFilter";
 import Pagination from "../../components/common/Pagination";
+import LoadingState from "../../components/common/LoadingState";
 import {
   useDoctorsBySpecialty,
 } from "../../hooks/useDoctors";
@@ -53,9 +54,7 @@ const DoctorsPage = () => {
         )}
 
         {doctorsQuery.isLoading && selectedSpecialty && (
-          <Text role="status" aria-live="polite">
-            {t("common.loading")}
-          </Text>
+          <LoadingState />
         )}
 
         {doctorsQuery.isError && (

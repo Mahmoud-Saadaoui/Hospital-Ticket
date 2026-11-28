@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { SPECIALTIES, getSpecialtyLabel } from "../../utils/specialties";
+import LoadingButton from "../common/LoadingButton";
 
 const emptyDoctor = {
   fullName: "",
@@ -106,9 +107,13 @@ function DoctorForm({ doctor, isSaving, errorMessage, onSubmit, onCancel }) {
       </div>
 
       <div className="responsive-actions">
-        <button type="submit" className="admin-button" disabled={isSaving}>
-          {isSaving ? t("common.loading") : t("common.save")}
-        </button>
+        <LoadingButton
+          type="submit"
+          className="admin-button"
+          loading={isSaving}
+        >
+          {t("common.save")}
+        </LoadingButton>
         {doctor && (
           <button type="button" className="admin-button admin-button--muted" onClick={onCancel}>
             {t("common.cancel")}

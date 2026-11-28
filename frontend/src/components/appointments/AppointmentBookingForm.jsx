@@ -6,6 +6,7 @@ import useAuth from "../../hooks/useAuth";
 import { useCreateAppointment } from "../../hooks/useAppointments";
 import { getAppointmentSlots } from "../../utils/appointmentSlots";
 import { getApiErrorMessage } from "../../utils/apiError";
+import LoadingButton from "../common/LoadingButton";
 
 const getTodayValue = () => {
   const today = new Date();
@@ -142,15 +143,13 @@ const AppointmentBookingForm = ({ doctorId }) => {
               </Text>
             )}
 
-            <Button
+            <LoadingButton
               type="submit"
-              disabled={!selectedSlot || createAppointment.isPending}
-              aria-busy={createAppointment.isPending}
+              disabled={!selectedSlot}
+              loading={createAppointment.isPending}
             >
-              {createAppointment.isPending
-                ? t("common.loading")
-                : t("appointment.book")}
-            </Button>
+              {t("appointment.book")}
+            </LoadingButton>
           </Flex>
         </form>
 

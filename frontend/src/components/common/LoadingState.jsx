@@ -11,9 +11,13 @@ const LoadingState = ({ message }) => {
       gap="3"
       role="status"
       aria-live="polite"
-      style={{ minHeight: "8rem", color: "var(--color-text-muted)" }}
+      style={{
+        minHeight: "50vh",
+        width: "100%",
+        color: "var(--color-text-muted)",
+      }}
     >
-      <Spinner />
+      <Spinner size="3" />
       <Text>{message || t("common.loading")}</Text>
     </Flex>
   );

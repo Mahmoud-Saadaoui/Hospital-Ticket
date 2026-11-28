@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Container, Flex, Box, Text, TextField, Button, Card, Link as RadixLink } from '@radix-ui/themes';
+import { Container, Flex, Box, Text, TextField, Card, Link as RadixLink } from '@radix-ui/themes';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { PersonIcon, EnvelopeClosedIcon, LockClosedIcon } from '@radix-ui/react-icons';
 import useAuth from '../hooks/useAuth';
 import { getApiErrorMessage } from "../utils/apiError";
+import LoadingButton from "../components/common/LoadingButton";
 
 const Register = () => {
   const { t } = useTranslation();
@@ -144,17 +145,14 @@ const Register = () => {
                   </TextField.Root>
                 </Box>
 
-                <Button
+                <LoadingButton
                   type="submit"
                   size="3"
                    style={{ width: '100%', marginBlockStart: '12px' }}
-                  disabled={isSubmitting}
-                  aria-busy={isSubmitting}
+                  loading={isSubmitting}
                 >
-                  {isSubmitting
-                    ? t('common.loading')
-                    : t('auth.registerButton')}
-                </Button>
+                  {t('auth.registerButton')}
+                </LoadingButton>
               </Flex>
             </form>
 
